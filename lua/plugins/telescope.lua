@@ -2,7 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   event = "BufReadPre",
   dependencies = {
-    { "nvim-telescope/telescope-fzf-native.nvim",  build = "make" },
+    { "nvim-telescope/telescope-fzf-native.nvim",  run = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-telescope/telescope-file-browser.nvim" },
   },
@@ -17,11 +17,13 @@ return {
       pickers = {
         find_files = {
           hidden = true,
+          theme = "ivy",
         },
         live_grep = {
           additional_args = function(opts)
             return { "--hidden" }
           end,
+          theme = "ivy",
         },
       },
       defaults = {
@@ -45,8 +47,8 @@ return {
         layout_config = {
           horizontal = {
             prompt_position = "top",
-            preview_width = 0.60,
-            results_width = 0.9,
+            preview_width = 0.55,
+            results_width = 0.55,
           },
           vertical = {
             mirror = false,
@@ -76,6 +78,7 @@ return {
       extensions = {
         file_browser = {
           hidden = true,
+          theme = "ivy",
           -- disables netrw and use telescope-file-browser in its place
           hijack_netrw = true,
           mappings = {
@@ -88,6 +91,7 @@ return {
           },
         },
         fzf = {
+          theme = "ivy",
           fuzzy = true,                   -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
           override_file_sorter = true,    -- override the file sorter
@@ -95,9 +99,7 @@ return {
           -- the default case_mode is "smart_case"
         },
         ["ui-select"] = {
-          theme.get_dropdown({
-            -- even more opts
-          }),
+          theme = "ivy",
         },
       },
     }

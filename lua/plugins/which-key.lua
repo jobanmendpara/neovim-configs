@@ -14,7 +14,6 @@ return {
       },
       ["g"] = {
         -- ["m"] = { "<CMD>Telescope harpoon marks<CR>", "Harpoon" },
-        ["l"] = { "<CMD>HopLine<CR>", "Line" },
       },
       ["w"] = {
         ["h"] = { "<CMD>split<CR>", "Horizontal Split" },

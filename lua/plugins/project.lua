@@ -13,6 +13,7 @@ local M = {
   },
   config = function(_, opts)
     require("project_nvim").setup(opts)
+    vim.cmd("SessionStart")
   end,
 }
 
