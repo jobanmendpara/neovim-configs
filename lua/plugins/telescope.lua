@@ -11,13 +11,13 @@ return {
     local actions = require("telescope.actions")
     local previewers = require("telescope.previewers")
     local sorters = require("telescope.sorters")
-    local theme = require("telescope.themes")
 
     return {
       pickers = {
         find_files = {
           hidden = true,
           theme = "ivy",
+          no_ignore = true,
         },
         live_grep = {
           additional_args = function(opts)
@@ -29,6 +29,7 @@ return {
       defaults = {
         vimgrep_arguments = {
           "rg",
+          "--hidden",
           "-L",
           "--color=never",
           "--no-heading",
@@ -58,7 +59,8 @@ return {
           preview_cutoff = 0,
         },
         file_sorter = sorters.get_fuzzy_file,
-        file_ignore_patterns = { "node_modules" },
+        file_ignore_patterns = { "node_modules", ".git" },
+        hidden = true,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
         path_display = { "truncate" },
         winblend = 0,
@@ -77,7 +79,10 @@ return {
       },
       extensions = {
         file_browser = {
-          hidden = true,
+          hidden = {
+            file_browser = true,
+            folder_broswer = true,
+          },
           theme = "ivy",
           -- disables netrw and use telescope-file-browser in its place
           hijack_netrw = true,
@@ -105,6 +110,8 @@ return {
     }
   end,
   config = function(_, opts)
+    local pickers = require("telescope.pickers")
+
     local telescope = require("telescope")
     telescope.setup(opts)
     telescope.load_extension("fzf")
