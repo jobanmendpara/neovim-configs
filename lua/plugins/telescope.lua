@@ -2,7 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   event = "BufReadPre",
   dependencies = {
-    { "nvim-telescope/telescope-fzf-native.nvim",  run = "make" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-telescope/telescope-file-browser.nvim" },
   },
@@ -15,12 +15,12 @@ return {
     return {
       pickers = {
         find_files = {
-          hidden = true,
+          hidden = false,
           theme = "ivy",
           no_ignore = true,
         },
         live_grep = {
-          additional_args = function(opts)
+          additional_args = function()
             return { "--hidden" }
           end,
           theme = "ivy",
@@ -97,11 +97,10 @@ return {
         },
         fzf = {
           theme = "ivy",
-          fuzzy = true,                   -- false will only do exact matching
-          override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true,    -- override the file sorter
-          case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-          -- the default case_mode is "smart_case"
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case",
         },
         ["ui-select"] = {
           theme = "ivy",
@@ -110,8 +109,6 @@ return {
     }
   end,
   config = function(_, opts)
-    local pickers = require("telescope.pickers")
-
     local telescope = require("telescope")
     telescope.setup(opts)
     telescope.load_extension("fzf")

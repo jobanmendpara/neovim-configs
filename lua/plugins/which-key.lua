@@ -6,6 +6,11 @@ return {
     local wk = require("which-key")
 
     local normal_mappings = {
+      [","] = {
+        name = "Settings",
+        ["c"] = { "<CMD>Telescope colorscheme<CR>", "Colorscheme"},
+        ["o"] = { "<CMD>Telescope vim_options<CR>", "Options"},
+      },
       ["/"] = { "<CMD>Telescope live_grep<CR>", "Search In Project" },
       [">"] = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Throw Harpoon" },
       ["f"] = {
