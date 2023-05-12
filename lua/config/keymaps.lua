@@ -9,10 +9,10 @@ vim.keymap.set("v", ">", ">gv", { desc = "Persist while indenting" })
 
 vim.keymap.set("v", "p", '"_dP', { desc = "Paste without replacing clipboard" })
 
-vim.keymap.set("n", "<C-M-Up>", ":resize -2<CR>", { desc = "Vertical resize", silent= true })
-vim.keymap.set("n", "<C-M-Down>", ":resize +2<CR>", { desc = "Vertical resize", silent= true })
-vim.keymap.set("n", "<C-M-Left>", ":vertical resize -2<CR>", { desc = "Horizontal resize", silent= true })
-vim.keymap.set("n", "<C-M-Right>", ":vertical resize +2<CR>", { desc = "Horizontal resize", silent= true })
+vim.keymap.set("n", "<C-M-Up>", ":resize -10<CR>", { desc = "Vertical resize", silent= true })
+vim.keymap.set("n", "<C-M-Down>", ":resize +10<CR>", { desc = "Vertical resize", silent= true })
+vim.keymap.set("n", "<C-M-Left>", ":vertical resize -10<CR>", { desc = "Horizontal resize", silent= true })
+vim.keymap.set("n", "<C-M-Right>", ":vertical resize +10<CR>", { desc = "Horizontal resize", silent= true })
 
 vim.keymap.set("n", "<C-M-f>", function()
     vim.lsp.buf.format({ async = false })
