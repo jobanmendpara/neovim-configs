@@ -1,6 +1,6 @@
 local M = {
   "shortcuts/no-neck-pain.nvim",
-  event = "BufReadPre",
+  event = "VeryLazy",
   version = "*"
 }
 

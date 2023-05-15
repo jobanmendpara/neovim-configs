@@ -1,6 +1,6 @@
 local M = {
   "andweeb/presence.nvim",
-  event = "VimEnter",
+  event = "VeryLazy",
   config = function()
     require("presence").setup({
       auto_update = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)

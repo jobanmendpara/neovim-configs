@@ -1,6 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
-  event = "BufReadPre",
+  event = "VimEnter",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
@@ -8,16 +8,22 @@ return {
   },
   keys = {},
   opts = function()
+    local icons = require("codicons")
     local actions = require("telescope.actions")
     local previewers = require("telescope.previewers")
     local sorters = require("telescope.sorters")
 
     return {
       pickers = {
+        fd = {
+          theme = "ivy",
+        },
         find_files = {
-          hidden = false,
+          hidden = true,
           theme = "ivy",
           no_ignore = true,
+          fuzzy = true,
+          -- find_command = { "fd", "--hidden", "--exclude", ".git"},
         },
         live_grep = {
           additional_args = function()
@@ -38,7 +44,7 @@ return {
           "--column",
           "--smart-case",
         },
-        prompt_prefix = "   ",
+        prompt_prefix = icons.get("search") .. "  ",
         selection_caret = "  ",
         entry_prefix = "  ",
         initial_mode = "insert",
@@ -53,6 +59,7 @@ return {
           },
           vertical = {
             mirror = false,
+            prompt_position = "bottom",
           },
           width = 0.97,
           height = 0.90,
@@ -83,20 +90,11 @@ return {
             file_browser = true,
             folder_broswer = true,
           },
+          respect_gitignore = false,
           theme = "ivy",
-          -- disables netrw and use telescope-file-browser in its place
           hijack_netrw = true,
-          mappings = {
-            ["i"] = {
-              -- your custom insert mode mappings
-            },
-            ["n"] = {
-              -- your custom normal mode mappings
-            },
-          },
         },
         fzf = {
-          theme = "ivy",
           fuzzy = true,
           override_generic_sorter = true,
           override_file_sorter = true,
@@ -116,5 +114,6 @@ return {
     telescope.load_extension("file_browser")
     telescope.load_extension("projects")
     telescope.load_extension("persisted")
+    telescope.load_extension("harpoon")
   end,
 }

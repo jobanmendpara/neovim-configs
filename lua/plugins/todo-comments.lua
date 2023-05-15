@@ -1,6 +1,6 @@
 local M = {
   "folke/todo-comments.nvim",
-  event = "BufReadPre",
+  event = "BufReadPost",
   config = function()
     require("todo-comments").setup({
       signs = true, -- show icons in the signs column

@@ -1,7 +1,7 @@
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
-  lazy = false,
+  lazy = true,
   config = function()
     local wk = require("which-key")
 
@@ -10,8 +10,9 @@ return {
         name = "Settings",
         ["c"] = { "<CMD>Telescope colorscheme<CR>", "Colorscheme"},
         ["o"] = { "<CMD>Telescope vim_options<CR>", "Options"},
+        ["l"] = { "<CMD>Lazy<CR>", "Lazy" },
       },
-      ["/"] = { "<CMD>Telescope live_grep<CR>", "Search In Project" },
+      ["/"] = { "<CMD>Telescope live_grep<CR>", "Live Grep" },
       [">"] = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Throw Harpoon" },
       ["f"] = {
         name = "File",
@@ -19,16 +20,18 @@ return {
         ["s"] = { "<CMD>w<CR>", "Save File"},
         ["S"] = { "<CMD>wa<CR>", "Save All Files"},
         ["e"] = { "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>", "File Browser (Current File)" },
-        ["r"] = { "<CMD>Telescope oldfiles<CR>", "Telescope Recent Files" },
+        ["r"] = { "<CMD>Telescope oldfiles<CR>", "Find Recent File" },
+        ["t"] = { "<CMD>Telescope current_buffer_fuzzy_find<CR>", "Find Text" },
       },
       ["p"] = {
         name = "Project",
         ["e"] = { "<CMD>Telescope file_browser<CR>", "File Browser" },
         ["h"] = { "<CMD>Telescope harpoon marks<CR>", "Harpoon" },
        -- TODO: Add replace functionality 
-        ["R"] = { "", "Replace in Files"},
+        ["R"] = { "<CMD>Lspsaga rename ++project<CR>", "Replace in Files"},
       },
-      ["l"] = {
+      ["t"] = { "<CMD>Telescope<CR>", "Telescope" },
+      ["]"] = {
         name = "LSP",
         ["i"] = { "<CMD>LspInfo<CR>", "Info" },
         ["m"] = { "<CMD>Mason<CR>", "Mason" },
@@ -37,14 +40,13 @@ return {
         ["t"] = { "<CMD>TroubleToggle<CR>", "Trouble"},
         ["x"] = { "<CMD>LspStop<CR>", "Stop" },
       },
-      ["L"] = { "<CMD>Lazy<CR>", "Lazy" },
       ["w"] = {
         name = "Window",
         ["-"] = { "<CMD>split<CR>", "Split Window Below" },
         ["/"] = { "<CMD>vsplit<CR>", "Split Window Right" },
         ["d"] = { "<CMD>q<CR>", "Close Window" },
         ["D"] = { "<CMD>only<CR>", "Close All Other Windows" },
-        ["n"] = { "<CMD>NoNeckPain<CR>", "No Neck Pain"},
+        ["c"] = { "<CMD>NoNeckPain<CR>", "No Neck Pain"},
         ["x"] = { "<CMD>qa<CR>", "Close All Windows" },
       },
     }

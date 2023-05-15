@@ -1,6 +1,6 @@
 local M = {
   "numToStr/Comment.nvim",
-  event = "BufReadPre",
+  lazy = true,
   keys = {
     {
       "<C-/>",

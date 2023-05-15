@@ -4,7 +4,6 @@ local M = {
   opts = function()
     local lualine_selectioncount = require("lualine.components.selectioncount")
     local codicons = require("codicons")
-    local navic = require("nvim-navic")
 
     local branch = {
       "branch",
@@ -44,10 +43,6 @@ local M = {
       source = diff_source
     }
 
-    local location = { "location", padding = 0 }
-
-    local filename = { "filename", path = 4 }
-
     local function selectionCount()
       if lualine_selectioncount() == "" then
         return 0
@@ -67,46 +62,29 @@ local M = {
         theme = "auto",
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = { {
+          "mode",
+          icons_enabled = false,
+          fmt = function()
+            return"ﮧ " 
+          end,
+        }},
         lualine_b = { branch },
         lualine_c = { diagnostics },
         lualine_x = { "filetype" },
         lualine_y = { diff },
-        lualine_z = { selectionCount, location },
+        lualine_z = { 
+          selectionCount,
+          {
+            "location",
+            padding = 0
+          }
+        },
       },
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
         lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-      },
-      winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          filename,
-          {
-            function()
-              return navic.get_location()
-            end,
-            cond = function()
-              return navic.is_available()
-            end,
-          },
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-      },
-      inactive_winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          filename,
-          { navic.get_location, cond = navic.is_available },
-        },
         lualine_x = {},
         lualine_y = {},
         lualine_z = {},
