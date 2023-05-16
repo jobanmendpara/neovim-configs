@@ -27,7 +27,7 @@ local M = {
             desc_hl = "String",
             key = "p",
             key_hl = "Number",
-            action = ":Telescope projects",
+            action = ":Telescope project",
           },
           {
             icon = codicons.get("file") .. " ",
