@@ -4,7 +4,7 @@ vim.g.maplocalleader = " "
 
 vim.opt.autoindent = true
 vim.opt.background = "dark"
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = ""
 vim.opt.cmdheight = 0
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.conceallevel = 0

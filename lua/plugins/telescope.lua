@@ -114,6 +114,5 @@ return {
     telescope.load_extension("file_browser")
     telescope.load_extension("projects")
     telescope.load_extension("persisted")
-    telescope.load_extension("harpoon")
   end,
 }
