@@ -1,4 +1,4 @@
-return {
+local M = {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   event = "BufReadPost",
@@ -42,3 +42,5 @@ return {
     require("nvim-treesitter.configs").setup(opts)
   end,
 }
+
+return M

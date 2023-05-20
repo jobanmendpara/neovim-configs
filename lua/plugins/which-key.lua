@@ -25,6 +25,7 @@ return {
         name = "Telescope",
         ["t"] = { "<CMD>Telescope<CR>", "Telescope" },
         ["g"] = { "<CMD>GrapplePopup tags<CR>", "Grapple" },
+        ["n"] = { "<CMD>Telescope notify layout_strategy=vertical initial_mode=normal<CR>", "Notify" },
       },
       ["w"] = {
         name = "Window",

@@ -18,6 +18,11 @@ require("lazy").setup("plugins", {
 	ui = {
 		border = "rounded",
 	},
-	checker = { enabled = true },
+	checker = {
+    enabled = true,
+    concurrency = nil,
+    notify = false,
+    frequency = 3600,
+  },
 	debug = false,
 })
