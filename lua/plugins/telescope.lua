@@ -18,13 +18,13 @@ return {
       pickers = {
         fd = {
           theme = "ivy",
+          layout_strategy = "vertical",
         },
         find_files = {
           hidden = true,
-          theme = "ivy",
           no_ignore = true,
           fuzzy = true,
-          -- find_command = { "fd", "--hidden", "--exclude", ".git"},
+          layout_strategy = "vertical",
         },
         live_grep = {
           additional_args = function()
@@ -67,7 +67,7 @@ return {
           preview_cutoff = 0,
         },
         file_sorter = sorters.get_fuzzy_file,
-        file_ignore_patterns = { "node_modules", ".git" },
+        file_ignore_patterns = { "node_modules", ".git", "dist" },
         hidden = true,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
         path_display = { "truncate" },
@@ -94,12 +94,22 @@ return {
           respect_gitignore = false,
           theme = "ivy",
           hijack_netrw = true,
+          use_fd = true,
+          auto_depth = false,
         },
         fzf = {
           fuzzy = true,
           override_generic_sorter = true,
           override_file_sorter = true,
           case_mode = "smart_case",
+        },
+        project = {
+          base_dirs = {
+            '~/Developer/cardinalManagement/admin',
+            '~/Developer/cardinalManagement/cardinalService',
+            '~/Developer/cardinalManagement/types',
+            '~/.dotfiles/nvim/.config/nvim',
+          },
         },
         ["ui-select"] = {
           theme = "ivy",
@@ -110,10 +120,10 @@ return {
   config = function(_, opts)
     local telescope = require("telescope")
     telescope.setup(opts)
-    telescope.load_extension("fzf")
     telescope.load_extension("ui-select")
     telescope.load_extension("file_browser")
     telescope.load_extension("project")
     telescope.load_extension("persisted")
+    telescope.load_extension("fzf")
   end,
 }

@@ -5,12 +5,21 @@ local M = {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "williamboman/mason-lspconfig.nvim",
+      "jose-elias-alvarez/typescript.nvim",
     },
-    config = function(_, _)
+    config = function()
       local utils = require("utils")
       local mason_lspconfig = require("mason-lspconfig")
       local lspconfig = require("lspconfig")
       local lsp_utils = require("plugins.lsp.lsp-utils")
+      local lsp_typescript = require("typescript")
+      lsp_typescript.setup({
+        disable_commands = false,
+        debug = false,
+        go_to_source_definition = {
+          fallback = true,
+        },
+      })
       lsp_utils.setup()
 
       mason_lspconfig.setup({
@@ -22,27 +31,6 @@ local M = {
           lspconfig[server_name].setup({
             on_attach = lsp_utils.on_attach,
             capabilities = lsp_utils.capabilities,
-          })
-        end,
-        ["pyright"] = function()
-          lspconfig.pyright.setup({
-            on_attach = lsp_utils.on_attach,
-            capabilities = lsp_utils.capabilities,
-            settings = {
-              python = {
-                analysis = {
-                  typeCheckingMode = "off",
-                },
-              },
-            },
-          })
-        end,
-        ["clangd"] = function()
-          local capabilities_cpp = lsp_utils.capabilities
-          capabilities_cpp.offsetEncoding = { "uts-16" }
-          lspconfig.clangd.setup({
-            on_attach = lsp_utils.on_attach,
-            capabilities = capabilities_cpp,
           })
         end,
       })
@@ -82,31 +70,6 @@ local M = {
       else
         ensure_installed()
       end
-    end,
-  },
-  {
-    "glepnir/lspsaga.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lspsaga").setup({
-        lightbulb = {
-          enable = false,
-          enable_in_insert = false,
-          sign = false,
-          sign_priority = 40,
-          virtual_text = false,
-        },
-        symbol_in_winbar = {
-          enable = true,
-          separator = " ",
-          ignore_patterns={},
-          hide_keyword = true,
-          show_file = true,
-          folder_level = 2,
-          respect_root = false,
-          color_mode = true,
-        },
-      })
     end,
   },
 }
