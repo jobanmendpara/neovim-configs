@@ -40,7 +40,7 @@ local M = {
         modified = codicons.get("diff-modified") .. " ",
         removed = codicons.get("diff-removed") .. " ",
       },
-      source = diff_source
+      source = diff_source,
     }
 
     local function selectionCount()
@@ -62,32 +62,26 @@ local M = {
         theme = "auto",
       },
       sections = {
-        lualine_a = { {
-          "mode",
-          icons_enabled = false,
-          fmt = function()
-            return"ﮧ " 
-          end,
-        }},
+        lualine_a = {
+          {
+            "mode",
+            icons_enabled = false,
+            fmt = function()
+              return "ﮧ "
+            end,
+          },
+        },
         lualine_b = { branch },
         lualine_c = { diagnostics },
         lualine_x = { "filetype" },
         lualine_y = { diff },
-        lualine_z = { 
+        lualine_z = {
           selectionCount,
           {
             "location",
-            padding = 0
-          }
+            padding = 0,
+          },
         },
-      },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
       },
       extensions = { "lazy" },
     }

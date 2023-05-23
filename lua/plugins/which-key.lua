@@ -9,16 +9,16 @@ return {
       ["f"] = {
         name = "File",
         ["f"] = { "<CMD>Telescope find_files<CR>", "Find File" },
-        ["s"] = { "<CMD>w<CR>", "Save File" },
+        ["s"] = { "<CMD>up<CR>", "Save File" },
         ["S"] = { "<CMD>wa<CR>", "Save All Files" },
         ["e"] = { "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>", "File Browser (Current File)" },
         ["r"] = { "<CMD>Telescope oldfiles<CR>", "Find Recent File" },
-        ["t"] = { "<CMD>Telescope current_buffer_fuzzy_find<CR>", "Find Text" },
+        ["t"] = { "<CMD>Telescope grep_string<CR>", "Find Text" },
       },
       ["p"] = {
         name = "Project",
         -- TODO: Add replace functionality
-        ["R"] = { "", "Replace in Files" },
+        -- ["R"] = { "", "Replace in Files" },
         ["v"] = { "<CMD>Telescope file_browser<CR>", "File Browser" },
       },
       ["t"] = {
@@ -29,15 +29,9 @@ return {
       },
       ["w"] = {
         name = "Window",
-        ["_"] = { "<CMD>split<CR>", "Split Window Below" },
-        ["|"] = { "<CMD>vsplit<CR>", "Split Window Right" },
-        ["d"] = { "<CMD>q<CR>", "Close Window" },
-        ["c"] = { "<CMD>NoNeckPain<CR>", "No Neck Pain" },
-        ["x"] = { "<CMD>qa<CR>", "Close All Windows" },
-        ["w"] = {
-          ["u"] = { "<CMD>NoNeckPainWidthUp<CR>", "NoNeckPainWidthUp" },
-          ["d"] = { "<CMD>NoNeckPainWidthDown<CR>", "NoNeckPainWidthDown" },
-        },
+        ["c"] = { "<CMD>NoNeckPain<CR>", "NoNeckPain" },
+        ["u"] = { "<CMD>NoNeckPainWidthUp<CR>", "NoNeckPainWidthUp" },
+        ["d"] = { "<CMD>NoNeckPainWidthDown<CR>", "NoNeckPainWidthDown" },
       },
       [","] = {
         name = "Editor Settings",
@@ -53,6 +47,7 @@ return {
           ["t"] = { "<CMD>TroubleToggle<CR>", "Trouble" },
           ["x"] = { "<CMD>LspStop<CR>", "Stop" },
         },
+        ["q"] = { "<CMD>qa<CR>", "Quit" },
       },
       ["/"] = { "<CMD>Telescope live_grep<CR>", "Live Grep" },
       [">"] = { "<CMD>GrappleTag<CR>", "GrappleTag" },
@@ -63,12 +58,12 @@ return {
     }
 
     local normal_opts = {
-      mode = "n", -- NORMAL mode
+      mode = "n",     -- NORMAL mode
       prefix = "<leader>",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
+      buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true,  -- use `silent` when creating keymaps
       noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
+      nowait = true,  -- use `nowait` when creating keymaps
     }
 
     wk.setup({

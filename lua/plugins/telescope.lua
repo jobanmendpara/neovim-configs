@@ -1,4 +1,4 @@
-return {
+local  M = {
   "nvim-telescope/telescope.nvim",
   event = "VimEnter",
   dependencies = {
@@ -25,6 +25,7 @@ return {
           no_ignore = true,
           fuzzy = true,
           layout_strategy = "vertical",
+          find_command = { "fd", "-H", "-t","f"},
         },
         live_grep = {
           additional_args = function()
@@ -123,7 +124,8 @@ return {
     telescope.load_extension("ui-select")
     telescope.load_extension("file_browser")
     telescope.load_extension("project")
-    telescope.load_extension("persisted")
     telescope.load_extension("fzf")
   end,
 }
+
+return M

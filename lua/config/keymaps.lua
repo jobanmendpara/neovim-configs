@@ -5,6 +5,9 @@ vim.keymap.set("n", "<leader><leader>", ":", { desc = "Remap command key" })
 
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>", { desc = "Clear search results" })
 
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
+
 vim.keymap.set("v", "<", "<gv", { desc = "Persist while indenting" })
 vim.keymap.set("v", ">", ">gv", { desc = "Persist while indenting" })
 
