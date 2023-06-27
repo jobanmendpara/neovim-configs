@@ -42,12 +42,13 @@ M.setup = function()
 
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code Action"))
   vim.keymap.set("n", "<leader>gd", "<CMD>Telescope lsp_definitions<CR>", opts("Go to Definition"))
-  vim.keymap.set("n", "<leader>go", "<CMD>SymbolsOutline<CR>", opts("Outline"))
+  vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, opts("Go to Definition"))
+vim.keymap.set("n", "<leader>go", "<CMD>SymbolsOutline<CR>", opts("Outline"))
   vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, opts("Hover Doc"))
   vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help, opts("Signature Help"))
   vim.keymap.set("n", "<leader>gr", "<CMD>Telescope lsp_references<CR>", opts("View References"))
   vim.keymap.set("n", "<leader>gi", "<CMD>Telescope lsp_implementations<cr>", opts("Telescope Implementations"))
-  vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, opts("Rename"))
+  vim.keymap.set("n", "<leader>LR", vim.lsp.buf.rename, opts("Rename"))
 
   vim.keymap.set("n", "<leader>ds", vim.diagnostic.open_float, opts("Show Line Diagnostics"))
 

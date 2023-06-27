@@ -15,6 +15,15 @@ return {
         ["r"] = { "<CMD>Telescope oldfiles<CR>", "Find Recent File" },
         ["t"] = { "<CMD>Telescope grep_string<CR>", "Find Text" },
       },
+      ["L"] = {
+        name = "LSP",
+        ["i"] = { "<CMD>LspInfo<CR>", "Info" },
+        ["m"] = { "<CMD>Mason<CR>", "Mason" },
+        ["r"] = { "<CMD>LspRestart<CR>", "Restart" },
+        ["s"] = { "<CMD>LspStart<CR>", "Start" },
+        ["t"] = { "<CMD>TroubleToggle<CR>", "Trouble" },
+        ["x"] = { "<CMD>LspStop<CR>", "Stop" },
+      },
       ["p"] = {
         name = "Project",
         -- TODO: Add replace functionality
@@ -38,15 +47,6 @@ return {
         ["c"] = { "<CMD>Telescope colorscheme<CR>", "Colorscheme" },
         ["o"] = { "<CMD>Telescope vim_options<CR>", "Options" },
         ["p"] = { "<CMD>Lazy<CR>", "Plugins" },
-        ["l"] = {
-          name = "LSP",
-          ["i"] = { "<CMD>LspInfo<CR>", "Info" },
-          ["m"] = { "<CMD>Mason<CR>", "Mason" },
-          ["r"] = { "<CMD>LspRestart<CR>", "Restart" },
-          ["s"] = { "<CMD>LspStart<CR>", "Start" },
-          ["t"] = { "<CMD>TroubleToggle<CR>", "Trouble" },
-          ["x"] = { "<CMD>LspStop<CR>", "Stop" },
-        },
         ["q"] = { "<CMD>qa<CR>", "Quit" },
       },
       ["/"] = { "<CMD>Telescope live_grep<CR>", "Live Grep" },
@@ -58,12 +58,12 @@ return {
     }
 
     local normal_opts = {
-      mode = "n",     -- NORMAL mode
+      mode = "n", -- NORMAL mode
       prefix = "<leader>",
-      buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true,  -- use `silent` when creating keymaps
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
       noremap = true, -- use `noremap` when creating keymaps
-      nowait = true,  -- use `nowait` when creating keymaps
+      nowait = true, -- use `nowait` when creating keymaps
     }
 
     wk.setup({
