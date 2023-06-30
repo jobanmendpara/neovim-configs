@@ -21,8 +21,7 @@ local M = {
         ["m"] = { "<CMD>Mason<CR>", "Mason" },
         ["r"] = { "<CMD>LspRestart<CR>", "Restart" },
         ["s"] = { "<CMD>LspStart<CR>", "Start" },
-        ["t"] = { "<CMD>TroubleToggle<CR>", "Trouble" },
-        ["x"] = { "<CMD>LspStop<CR>", "Stop" },
+        ["S"] = { "<CMD>LspStop<CR>", "Stop" },
       },
       ["p"] = {
         name = "Project",
@@ -32,15 +31,17 @@ local M = {
       },
       ["t"] = {
         name = "Telescope",
-        ["t"] = { "<CMD>Telescope<CR>", "Telescope" },
         ["g"] = { "<CMD>GrapplePopup tags<CR>", "Grapple" },
         ["n"] = { "<CMD>Telescope notify layout_strategy=vertical initial_mode=normal<CR>", "Notify" },
+        ["T"] = { "<CMD>Telescope<CR>", "Telescope" },
       },
+      ["T"] = { "<CMD>TroubleToggle<CR>", "Trouble" },
       ["w"] = {
         name = "Window",
-        ["c"] = { "<CMD>NoNeckPain<CR>", "NoNeckPain" },
-        ["u"] = { "<CMD>NoNeckPainWidthUp<CR>", "NoNeckPainWidthUp" },
-        ["d"] = { "<CMD>NoNeckPainWidthDown<CR>", "NoNeckPainWidthDown" },
+        ["c"] = { "<CMD>NoNeckPain<CR>", "Center" },
+        ["n"] = { "<CMD>NoNeckPainWidthDown<CR>", "Narrow" },
+        ["w"] = { "<CMD>NoNeckPainWidthUp<CR>", "Widen" },
+        ["q"] = { "<CMD>close<CR>", "Close" },
       },
       [","] = {
         name = "Editor Settings",
