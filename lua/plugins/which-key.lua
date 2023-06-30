@@ -1,4 +1,4 @@
-return {
+local M = {
   "folke/which-key.nvim",
   event = "VeryLazy",
   lazy = true,
@@ -72,3 +72,5 @@ return {
     wk.register(normal_mappings, normal_opts)
   end,
 }
+
+return M

@@ -3,7 +3,7 @@ local M = {
   event = "VeryLazy",
   config = function ()
     require("grapple").setup()
-  end
+  end,
 }
 
 return M

@@ -1,3 +1,4 @@
+vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" });
 vim.keymap.set({"n", "v"}, "q", "<nop>");
 
 vim.keymap.set("n", "<leader><leader>", ":", { desc = "Remap command key" })
