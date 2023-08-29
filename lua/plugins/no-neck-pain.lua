@@ -7,7 +7,8 @@ local M = {
       autocmds = {
         enableOnVimEnter = true,
         enableOnTabEnter = true,
-      }
+      },
+      width = 125
     })
   end,
 }

@@ -3,6 +3,8 @@ vim.keymap.set({"n", "v"}, "q", "<nop>");
 
 vim.keymap.set("n", "<leader><leader>", ":", { desc = "Remap command key" })
 
+vim.keymap.set("n", "<C-x>", ":lua ", { desc = "Lua"})
+
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>", { desc = "Clear search results" })
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll Down" })

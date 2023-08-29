@@ -34,7 +34,7 @@ local M = {
     local diff = {
       "diff",
       colored = true,
-      separator = "%#SLSeparator#" .. "│ " .. "%*",
+      separator = "%#SLSeparator#" .. "│ " .. "%* ",
       symbols = {
         added = codicons.get("diff-added") .. " ",
         modified = codicons.get("diff-modified") .. " ",

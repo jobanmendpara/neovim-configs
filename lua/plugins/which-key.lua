@@ -6,22 +6,38 @@ local M = {
     local wk = require("which-key")
 
     local normal_mappings = {
+      ["a"] = {
+        name = "Actions",
+        ["c"] = { vim.lsp.buf.code_action, "Code Action" },
+        ["d"] = { vim.diagnostic.open_float, "Show Line Diagnostics" },
+        ["f"] = { function()
+          vim.lsp.buf.format({ async = true })
+          vim.api.nvim_command("update")
+        end, "Format" },
+        ["h"] = { "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon"},
+        ["j"] = { "<CMD>lua MiniSplitjoin.join()<CR>_", "Join"},
+        ["k"] = { vim.lsp.buf.hover, "Hover Doc" },
+        ["K"] = { vim.lsp.buf.signature_help, "Hover Signature" },
+        ["l"] = {
+          name = "LSP",
+          ["d"] = { "<CMD>Telescope lsp_definitions<CR>" , "Go to Definition" },
+          ["D"] = { vim.lsp.buf.declaration , "Go to Declaration" },
+          ["i"] = { "<CMD>Telescope lsp_implementations<CR>", "View Implementations" },
+          ["o"] = { "<CMD>SymbolsOutline<CR>", "Outline" },
+          ["r"] = { "<CMD>Telescope lsp_references<CR>", "View References" },
+        },
+        ["r"] = { vim.lsp.buf.rename, "Rename" },
+        ["s"] = { "<CMD>lua MiniSplitjoin.split()<CR>_", "Split"},
+        ["t"] = { "<CMD>TroubleToggle<CR>", "Trouble" },
+        ["w"] = { "<CMD>up<CR>", "Save File" },
+        ["W"] = { "<CMD>wa<CR>", "Save All Files" },
+      },
       ["f"] = {
         name = "File",
-        ["f"] = { "<CMD>Telescope find_files<CR>", "Find File" },
-        ["s"] = { "<CMD>up<CR>", "Save File" },
-        ["S"] = { "<CMD>wa<CR>", "Save All Files" },
         ["e"] = { "<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>", "File Browser (Current File)" },
+        ["f"] = { "<CMD>Telescope find_files<CR>", "Find File" },
+        ["s"] = { "<CMD>Telescope current_buffer_fuzzy_find<CR>", "Find Recent File" },
         ["r"] = { "<CMD>Telescope oldfiles<CR>", "Find Recent File" },
-        ["t"] = { "<CMD>Telescope grep_string<CR>", "Find Text" },
-      },
-      ["L"] = {
-        name = "LSP",
-        ["i"] = { "<CMD>LspInfo<CR>", "Info" },
-        ["m"] = { "<CMD>Mason<CR>", "Mason" },
-        ["r"] = { "<CMD>LspRestart<CR>", "Restart" },
-        ["s"] = { "<CMD>LspStart<CR>", "Start" },
-        ["S"] = { "<CMD>LspStop<CR>", "Stop" },
       },
       ["p"] = {
         name = "Project",
@@ -31,17 +47,19 @@ local M = {
       },
       ["t"] = {
         name = "Telescope",
-        ["g"] = { "<CMD>GrapplePopup tags<CR>", "Grapple" },
         ["n"] = { "<CMD>Telescope notify layout_strategy=vertical initial_mode=normal<CR>", "Notify" },
-        ["T"] = { "<CMD>Telescope<CR>", "Telescope" },
+        ["m"] = { "<CMD>Telescope<CR>", "Menu" },
+        ["h"] = { "<CMD>Telescope harpoon marks<CR>", "Harpoon" },
       },
-      ["T"] = { "<CMD>TroubleToggle<CR>", "Trouble" },
       ["w"] = {
         name = "Window",
-        ["c"] = { "<CMD>NoNeckPain<CR>", "Center" },
-        ["n"] = { "<CMD>NoNeckPainWidthDown<CR>", "Narrow" },
-        ["w"] = { "<CMD>NoNeckPainWidthUp<CR>", "Widen" },
-        ["q"] = { "<CMD>close<CR>", "Close" },
+        ["c"] = { "<CMD>close<CR>", "Close" },
+        ["n"] = { "<CMD>NoNeckPainScratchPad<CR>", "ScratchPad" },
+        ["s"] = { "<CMD>split<CR>", "Horizontal Split" },
+        ["t"] = { "<CMD>NoNeckPain<CR>", "Toggle" },
+        ["v"] = { "<CMD>vsplit<CR>", "Vertical Split" },
+        ["+"] = { "<CMD>NoNeckPainWidthUp<CR>", "Widen" },
+        ["-"] = { "<CMD>NoNeckPainWidthDown<CR>", "Narrow" },
       },
       [","] = {
         name = "Editor Settings",
@@ -49,13 +67,19 @@ local M = {
         ["o"] = { "<CMD>Telescope vim_options<CR>", "Options" },
         ["p"] = { "<CMD>Lazy<CR>", "Plugins" },
         ["q"] = { "<CMD>qa<CR>", "Quit" },
+        ["l"] = {
+          name = "LSP",
+          ["i"] = { "<CMD>LspInfo<CR>", "Info" },
+          ["m"] = { "<CMD>Mason<CR>", "Mason" },
+          ["r"] = { "<CMD>LspRestart<CR>", "Restart" },
+          ["s"] = { "<CMD>LspStart<CR>", "Start" },
+          ["S"] = { "<CMD>LspStop<CR>", "Stop" },
+        },
       },
+      [">"] = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Harpoon - Add File" },
+      ["<TAB>"] = { "<CMD>lua require('harpoon.marks').nav_next()<CR>", "Harpoon - Next File" },
+      ["<S-TAB>"] = { "<CMD>lua require('harpoon.marks').nav_prev()<CR>", "Harpoon - Previous File" },
       ["/"] = { "<CMD>Telescope live_grep<CR>", "Live Grep" },
-      [">"] = { "<CMD>GrappleTag<CR>", "GrappleTag" },
-      ["<TAB>"] = {
-        ["n"] = { "<CMD>GrappleCycle forward<CR>", "Grapple Forward" },
-        ["p"] = { "<CMD>GrappleCycle backward<CR>", "Grapple Backward" },
-      },
     }
 
     local normal_opts = {

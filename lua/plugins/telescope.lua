@@ -1,43 +1,41 @@
 local  M = {
   "nvim-telescope/telescope.nvim",
+  tag = '0.1.2',
   event = "VimEnter",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-telescope/telescope-project.nvim" },
+    { "nvim-telescope/telescope-symbols.nvim" },
   },
-  keys = {},
-  opts = function()
+  config = function()
     local icons = require("codicons")
     local actions = require("telescope.actions")
     local previewers = require("telescope.previewers")
     local sorters = require("telescope.sorters")
 
-    return {
+    local fb_actions = require("telescope").extensions.file_browser.actions
+
+    local telescope = require("telescope").setup({
       pickers = {
         fd = {
-          theme = "ivy",
-          layout_strategy = "vertical",
+          layout_strategy = "horizontal",
         },
         find_files = {
-          hidden = true,
-          no_ignore = true,
+          hidden = false,
+          no_ignore = false,
           fuzzy = true,
-          layout_strategy = "vertical",
-          find_command = { "fd", "-H", "-t","f"},
+          layout_strategy = "horizontal",
+          find_command = { "fd", "-t","f"},
+          -- find_command = { "rg", "--files"}
         },
         live_grep = {
-          additional_args = function()
-            return { "--hidden" }
-          end,
-          theme = "ivy",
         },
       },
       defaults = {
         vimgrep_arguments = {
           "rg",
-          "--hidden",
           "-L",
           "--color=never",
           "--no-heading",
@@ -88,12 +86,17 @@ local  M = {
       },
       extensions = {
         file_browser = {
+          mappings = {
+            ['i'] = {
+              ["<A-a>"] = fb_actions.create,
+              ["<A-x>"] = fb_actions.remove,
+            },
+          },
           hidden = {
             file_browser = true,
             folder_broswer = true,
           },
           respect_gitignore = false,
-          theme = "ivy",
           hijack_netrw = true,
           use_fd = true,
           auto_depth = false,
@@ -113,18 +116,14 @@ local  M = {
           },
         },
         ["ui-select"] = {
-          theme = "ivy",
         },
       },
-    }
-  end,
-  config = function(_, opts)
-    local telescope = require("telescope")
-    telescope.setup(opts)
+    })
     telescope.load_extension("ui-select")
     telescope.load_extension("file_browser")
     telescope.load_extension("project")
     telescope.load_extension("fzf")
+    telescope.load_extension("harpoon")
   end,
 }
 
