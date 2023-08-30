@@ -1,7 +1,7 @@
 local M = {
   {
     "echasnovski/mini.nvim",
-    version = "false",
+    branch = "main",
     event = "BufEnter",
     config = function()
       local mini_ai = require("mini.ai").setup()

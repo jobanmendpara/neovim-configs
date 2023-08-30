@@ -1,5 +1,5 @@
 local M = {
-  "TimUntersberger/neogit",
+  "NeogitOrg/neogit",
   event = "VimEnter",
   config = function ()
     require("neogit").setup()

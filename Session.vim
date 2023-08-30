@@ -15,28 +15,22 @@ else
 endif
 badd +3 ~/.dotfiles/nvim/.config/nvim/lua/plugins/mini.lua
 badd +1 Session.vim
-badd +59 lua/plugins/lsp/lsp-utils.lua
-badd +48 lua/plugins/which-key.lua
-badd +76 lua/plugins/lualine.lua
-badd +13 lua/plugins/no-neck-pain.lua
-badd +5 lua/plugins/outline.lua
+badd +42 lua/plugins/lsp/lsp-utils.lua
+badd +81 lua/plugins/which-key.lua
+badd +40 lua/plugins/lualine.lua
+badd +11 lua/plugins/no-neck-pain.lua
+badd +1 lua/plugins/outline.lua
+badd +15 lua/plugins/flash.lua
+badd +27 lua/plugins/telescope.lua
+badd +28 lua/config/options.lua
+badd +3 lua/plugins/trouble.lua
+badd +1 lua/plugins/notify.lua
+badd +6 lua/config/keymaps.lua
 argglobal
 %argdel
-edit lua/plugins/outline.lua
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
+edit lua/plugins/which-key.lua
 argglobal
-balt lua/plugins/which-key.lua
+balt lua/plugins/lsp/lsp-utils.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -45,23 +39,19 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-1
-normal! zo
-let s:l = 5 - ((4 * winheight(0) + 21) / 42)
+let s:l = 81 - ((18 * winheight(0) + 14) / 28)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 5
-normal! 038|
+keepjumps 81
+normal! 098|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20
+set winheight=1 winwidth=1
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
