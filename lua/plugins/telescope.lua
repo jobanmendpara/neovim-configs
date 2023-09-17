@@ -1,6 +1,6 @@
 local  M = {
   "nvim-telescope/telescope.nvim",
-  event = "VeryLazy",
+  event = "VimEnter",
   tag = "0.1.2",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -17,7 +17,9 @@ local  M = {
 
     local fb_actions = require("telescope").extensions.file_browser.actions
 
-    local telescope = require("telescope").setup({
+    local telescope = require("telescope")
+
+    telescope.setup({
       pickers = {
         fd = {
           layout_strategy = "horizontal",
@@ -86,12 +88,7 @@ local  M = {
       },
       extensions = {
         file_browser = {
-          mappings = {
-            ['i'] = {
-              ["<A-a>"] = fb_actions.create,
-              ["<A-x>"] = fb_actions.remove,
-            },
-          },
+          mappings = {},
           hidden = {
             file_browser = true,
             folder_broswer = true,
@@ -123,7 +120,6 @@ local  M = {
     telescope.load_extension("file_browser")
     telescope.load_extension("project")
     telescope.load_extension("fzf")
-    telescope.load_extension("harpoon")
   end,
 }
 

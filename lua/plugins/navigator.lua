@@ -2,10 +2,10 @@ local M = {
   "numToStr/Navigator.nvim",
   event = "VeryLazy",
   keys = {
-    { "<C-h>", "<cmd>NavigatorLeft<cr>" },
-    { "<C-l>", "<cmd>NavigatorRight<cr>" },
-    { "<C-k>", "<cmd>NavigatorUp<cr>" },
-    { "<C-j>", "<cmd>NavigatorDown<cr>" },
+    { "<C-Left>", "<cmd>NavigatorLeft<cr>" },
+    { "<C-Right>", "<cmd>NavigatorRight<cr>" },
+    { "<C-Up>", "<cmd>NavigatorUp<cr>" },
+    { "<C-Down>", "<cmd>NavigatorDown<cr>" },
   },
   config = true,
 }

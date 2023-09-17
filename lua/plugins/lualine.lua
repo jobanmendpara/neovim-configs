@@ -73,7 +73,7 @@ local M = {
         },
         lualine_b = { branch },
         lualine_c = { diagnostics },
-        lualine_x = { "filetype" },
+        lualine_x = { "tabs", "filetype" },
         lualine_y = { diff },
         lualine_z = {
           selectionCount,

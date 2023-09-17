@@ -6,6 +6,7 @@ vim.opt.autoindent = true
 vim.opt.background = "dark"
 vim.opt.clipboard = ""
 vim.opt.cmdheight = 0
+vim.opt.colorcolumn = "120"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.conceallevel = 0
 vim.opt.cursorline = true

@@ -1,4 +1,4 @@
-return {
+local M = {
   "catppuccin/nvim",
   lazy = false,
   priority = 1000,
@@ -6,3 +6,5 @@ return {
     vim.cmd([[colorscheme catppuccin]])
   end
 }
+
+return M
