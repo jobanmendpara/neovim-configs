@@ -1,8 +1,10 @@
 local M = {
-  "okuuva/auto-save.nvim",
+  "Pocco81/auto-save.nvim",
   cmd = "ASToggle", -- optional for lazy loading on command
-  event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
-  opts = {},
+  event = "BufEnter",
+  config = function ()
+    require("auto-save").setup()
+  end,
 }
 
 return M

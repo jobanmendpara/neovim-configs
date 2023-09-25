@@ -61,7 +61,7 @@ M.mason_packages = {
     "tailwindcss-language-server",
     "typescript-language-server",
     "yaml-language-server",
-    "editorconfig-checker"
+    "editorconfig-checker",
 }
 
 M.lsp_servers = {

@@ -24,10 +24,7 @@ vim.keymap.set("n", "<C-M-Down>", ":resize +8<CR>", { desc = "Vertical resize", 
 vim.keymap.set("n", "<C-M-Left>", ":vertical resize -8<CR>", { desc = "Horizontal resize", silent= true })
 vim.keymap.set("n", "<C-M-Right>", ":vertical resize +8<CR>", { desc = "Horizontal resize", silent= true })
 
-vim.keymap.set("n", "[<TAB>", ":tabprevious<CR>", { desc = "Previous Tab"})
-vim.keymap.set("n", "]<TAB>", ":tabnext<CR>", { desc = "Next Tab"})
-vim.keymap.set("n", "<TAB>n", ":tabnew<CR>", { desc = "New Tab"})
-vim.keymap.set("n", "<TAB>c", ":tabclose<CR>", { desc = "Close Tab"})
-
 vim.keymap.set("n", "<C-s>", "<CMD>up<CR>", { desc = "Save File"});
 vim.keymap.set("n", "<C-S-s>", "<CMD>wa<CR>", { desc = "Save File"});
+
+vim.keymap.set("n", "<A-f>", "<CMD>Telescope find_files<CR>", { desc = "Find File"});

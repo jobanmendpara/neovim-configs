@@ -28,7 +28,7 @@ local  M = {
           hidden = false,
           no_ignore = false,
           fuzzy = true,
-          layout_strategy = "horizontal",
+          -- layout_strategy = "horizontal",
           find_command = { "fd", "-t","f"},
           -- find_command = { "rg", "--files"}
         },
@@ -56,8 +56,8 @@ local  M = {
         layout_config = {
           horizontal = {
             prompt_position = "top",
-            preview_width = 0.55,
-            results_width = 0.55,
+            preview_width = 0.50,
+            results_width = 0.50,
           },
           vertical = {
             mirror = false,

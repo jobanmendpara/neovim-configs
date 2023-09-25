@@ -4,16 +4,23 @@ local M = {
   opts = {},
   keys = {
     {
-      "<CR>",
+      "<A-j>",
       mode = { "n", "x", "o" },
       function()
         -- default options: exact mode, multi window, all directions, with a backdrop
-        require("flash").jump()
+        local Flash = require("flash")
+        local function format(opts)
+          return {
+            { opts.match.label1, "FlashMatch" },
+            { opts.match.label2, "FlashLabel" },
+          }
+        end
+        Flash.jump()
       end,
       desc = "Flash",
     },
     {
-      "<S-CR>",
+      "<A-S-J>",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump({
