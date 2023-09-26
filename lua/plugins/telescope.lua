@@ -14,9 +14,6 @@ local  M = {
     local actions = require("telescope.actions")
     local previewers = require("telescope.previewers")
     local sorters = require("telescope.sorters")
-
-    local fb_actions = require("telescope").extensions.file_browser.actions
-
     local telescope = require("telescope")
 
     telescope.setup({
@@ -106,9 +103,9 @@ local  M = {
         },
         project = {
           base_dirs = {
-            '~/Developer/cardinalManagement/admin',
-            '~/Developer/cardinalManagement/cardinalService',
-            '~/Developer/cardinalManagement/types',
+            '~/Developer/uTyme/web',
+            '~/Developer/uTyme/service',
+            '~/Developer/uTyme/types',
             '~/.dotfiles/nvim/.config/nvim',
           },
         },
