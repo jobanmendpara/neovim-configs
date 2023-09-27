@@ -22,15 +22,14 @@ local  M = {
           layout_strategy = "horizontal",
         },
         find_files = {
-          hidden = false,
+          hidden = true,
           no_ignore = false,
           fuzzy = true,
           -- layout_strategy = "horizontal",
           find_command = { "fd", "-t","f"},
           -- find_command = { "rg", "--files"}
         },
-        live_grep = {
-        },
+        live_grep = {},
       },
       defaults = {
         vimgrep_arguments = {
