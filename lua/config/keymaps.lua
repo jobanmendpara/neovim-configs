@@ -1,4 +1,5 @@
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" });
+vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" }); -- Needed so spectre can detect escape
 vim.keymap.set({"n", "v"}, "q", "<nop>");
 
 vim.keymap.set("n", "<leader><leader>", ":", { desc = "Remap command key" })
