@@ -51,6 +51,10 @@ edit lua/plugins/flash.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
 wincmd t
@@ -60,6 +64,7 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
+wincmd =
 argglobal
 balt lua/config/keymaps.lua
 setlocal fdm=expr
@@ -70,17 +75,35 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 23 - ((18 * winheight(0) + 17) / 35)
+let s:l = 23 - ((21 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 23
-let s:c = 13 - ((9 * winwidth(0) + 61) / 123)
-if s:c > 0
-  exe 'normal! ' . s:c . '|zs' . 13 . '|'
-else
-  normal! 013|
+normal! 013|
+wincmd w
+argglobal
+if bufexists(fnamemodify("lua/plugins/flash.lua", ":p")) | buffer lua/plugins/flash.lua | else | edit lua/plugins/flash.lua | endif
+if &buftype ==# 'terminal'
+  silent file lua/plugins/flash.lua
 endif
+balt lua/config/keymaps.lua
+setlocal fdm=expr
+setlocal fde=nvim_treesitter#foldexpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 23 - ((21 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 23
+normal! 013|
+wincmd w
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

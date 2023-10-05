@@ -47,6 +47,10 @@ local M = {
         ["S"] = { "<CMD>LspStop<CR>", "Stop" },
       },
       ["/"] = { "<CMD>Telescope live_grep<CR>", "Live Grep" },
+      ["<TAB>"] = {
+        ["n"] = { "<CMD>tabnew<CR>", "New Tab" },
+        ["c"] = { "<CMD>tabclose<CR>", "Close Tab" },
+      }
     }
 
     local normal_opts = {

@@ -7,8 +7,8 @@ local M = {
     local mini_bracketed = require("mini.bracketed").setup()
     local mini_comment = require("mini.comment").setup({
       mappings = {
-        comment = '<C-/>',
-        comment_line = '<C-/>',
+        comment = 'gc',
+        comment_line = 'gc',
       },
     })
     local mini_cursorword = require("mini.cursorword").setup()

@@ -1,6 +1,5 @@
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" });
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" }); -- Needed so spectre can detect escape
-vim.keymap.set({"n", "v"}, "q", "<nop>");
 
 vim.keymap.set("n", "<leader><leader>", ":", { desc = "Remap command key" })
 
@@ -29,3 +28,6 @@ vim.keymap.set("n", "<C-s>", "<CMD>up<CR>", { desc = "Save File"});
 vim.keymap.set("n", "<C-S-s>", "<CMD>wa<CR>", { desc = "Save File"});
 
 vim.keymap.set("n", "<A-f>", "<CMD>Telescope find_files<CR>", { desc = "Find File"});
+vim.keymap.set("n", "<A-b>", "<CMD>GrapplePopup tags<CR>", { desc = "Grapple"});
+vim.keymap.set("n", "[<TAB>", "<CMD>tabnext<CR>", { desc = "Next Tab"});
+vim.keymap.set("n", "]<TAB>", "<CMD>tabprevious<CR>", { desc = "Previous Tab"});

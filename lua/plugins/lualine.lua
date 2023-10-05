@@ -67,13 +67,14 @@ local M = {
             "mode",
             icons_enabled = false,
             fmt = function()
-              return "ﮧ "
+              return ""
             end,
           },
+          branch,
         },
-        lualine_b = { branch },
-        lualine_c = { diagnostics },
-        lualine_x = { "tabs", "filetype" },
+        lualine_b = { diagnostics },
+        lualine_c = { "tabs" },
+        lualine_x = {  "filename", "filetype" },
         lualine_y = { diff },
         lualine_z = {
           selectionCount,
