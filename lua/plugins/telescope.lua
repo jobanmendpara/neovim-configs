@@ -5,7 +5,6 @@ local  M = {
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
-    { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-telescope/telescope-project.nvim" },
     { "nvim-telescope/telescope-symbols.nvim" },
   },
@@ -83,17 +82,6 @@ local  M = {
         },
       },
       extensions = {
-        file_browser = {
-          mappings = {},
-          hidden = {
-            file_browser = true,
-            folder_broswer = true,
-          },
-          respect_gitignore = false,
-          hijack_netrw = true,
-          use_fd = true,
-          auto_depth = false,
-        },
         fzf = {
           fuzzy = true,
           override_generic_sorter = true,
@@ -113,7 +101,6 @@ local  M = {
       },
     })
     telescope.load_extension("ui-select")
-    telescope.load_extension("file_browser")
     telescope.load_extension("project")
     telescope.load_extension("fzf")
   end,

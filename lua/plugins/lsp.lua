@@ -26,13 +26,6 @@ local M = {
       lsp_zero.extend_lspconfig()
 
       lsp_zero.on_attach(function(client, bufnr)
-        lsp_zero.default_keymaps({buffer = bufnr})
-        vim.keymap.set("n", "g.", vim.lsp.buf.code_action, { desc = "Code Action" })
-        vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-        vim.keymap.set("n", "gd", "<CMD>Telescope lsp_definitions<CR>", { desc = "Telescope Definitions" })
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Telescope Declaration" })
-        vim.keymap.set("n", "gR", "<CMD>Telescope lsp_references<CR>", { desc = "Telescope References" })
-        vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show Line Diagnostics" })
       end)
 
       require('mason-lspconfig').setup({

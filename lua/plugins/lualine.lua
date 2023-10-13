@@ -58,7 +58,8 @@ local M = {
         disabled_filetypes = {},
         globalstatus = true,
         icons_enabled = true,
-        section_separators = "",
+        -- section_separators = "",
+        section_separators = { left = '', right = '' },
         theme = "auto",
       },
       sections = {
@@ -80,7 +81,7 @@ local M = {
           selectionCount,
           {
             "location",
-            padding = 0,
+            padding = 1,
           },
         },
       },

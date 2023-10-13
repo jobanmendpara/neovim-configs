@@ -140,4 +140,8 @@ function M.toggle_quickfix()
     end
 end
 
+M.cmd = function (command)
+  return "<CMD>" .. command .. "<CR>"
+end
+
 return M

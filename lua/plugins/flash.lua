@@ -43,7 +43,7 @@ local M = {
         -- max pattern length. If the pattern length is equal to this
         -- labels will no longer be skipped. When it exceeds this length
         -- it will either end in a jump or terminate the search
-        max_length = 2, ---@type number|false
+        max_length = false, ---@type number|false
       },
       jump = {
         -- save location in the jumplist
@@ -57,7 +57,7 @@ local M = {
         -- clear highlight after jump
         nohlsearch = false,
         -- automatically jump when there is only one match
-        autojump = true,
+        autojump = false,
         -- You can force inclusive/exclusive jumps by setting the
         -- `inclusive` option. By default it will be automatically
         -- set based on the mode.
@@ -253,7 +253,7 @@ local M = {
     },
   keys = {
     {
-      "s",
+      '<leader>j',
       mode = { "n", "x", "o" },
       function()
         -- default options: exact mode, multi window, all directions, with a backdrop
@@ -266,10 +266,10 @@ local M = {
         end
         Flash.jump()
       end,
-      desc = "Flash",
+      desc = "Flash - 2 Char",
     },
     {
-      "S",
+      "<leader>J",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump({
@@ -278,7 +278,7 @@ local M = {
           pattern = "^"
         })
       end,
-      desc = "Flash",
+      desc = "Flash - Line",
     },
     {
       "r",

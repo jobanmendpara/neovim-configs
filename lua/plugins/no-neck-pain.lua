@@ -8,7 +8,7 @@ local M = {
         enableOnVimEnter = true,
         enableOnTabEnter = true,
       },
-      width = 125
+      width = 135
     })
   end,
 }
