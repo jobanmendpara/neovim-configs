@@ -47,8 +47,8 @@ local M = {
         { mode = 'n', keys = '<leader>m',  desc = 'Move' },
         { mode = 'n', keys = '<leader>w',  desc = 'Window' },
         { mode = 'n', keys = '<leader>t',  desc = 'Telescope' },
-        { mode = 'n', keys = '[b',         postkeys = '[' },
-        { mode = 'n', keys = ']b',         postkeys = ']' },
+        { mode = 'n', keys = '[p',         postkeys = '[' },
+        { mode = 'n', keys = ']p',         postkeys = ']' },
         { mode = 'n', keys = '[d',         postkeys = '[' },
         { mode = 'n', keys = ']d',         postkeys = ']' },
         { mode = 'n', keys = '[m',         postkeys = '[' },
@@ -117,7 +117,7 @@ local M = {
       },
     })
     local mini_pairs = require("mini.pairs").setup()
-    local mini_pick = require("mini.pick").setup()
+    -- local mini_pick = require("mini.pick").setup()
     local mini_operators = require("mini.operators").setup()
     local mini_sessions = require("mini.sessions").setup({
       autoread = false,
@@ -147,6 +147,12 @@ local M = {
     local mini_trailspace = require("mini.trailspace").setup()
     local mini_visits = require("mini.visits").setup()
   end,
+  keys = {
+    { "mf", "<CMD>lua MiniVisits.add_label()<CR>", desc = "Add Label" },
+    { "mF", "<CMD>lua MiniVisits.remove_label()<CR>", desc = "Remove Label" },
+    { "[p", "<CMD>lua MiniVisits.iterate_paths('forward')<CR>", desc = "Cycle Paths Backward"},
+    { "]p", "<CMD>lua MiniVisits.iterate_paths('backward')<CR>", desc = "Cycle Paths Forward"},
+  },
 }
 
 return M

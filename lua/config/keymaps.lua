@@ -30,12 +30,15 @@ vim.keymap.set("n", "<A-S-t>", "<CMD>tabclose<CR>", { desc = "Close Tab" })
 vim.keymap.set("n", "[<TAB>", "<CMD>tabnext<CR>", { desc = "Next Tab" })
 vim.keymap.set("n", "]<TAB>", "<CMD>tabprevious<CR>", { desc = "Previous Tab" })
 
+vim.keymap.set("n", "<F1>", "<CMD>Telescope help_tags<CR>", { desc = "Find Help" })
+
 -- Leader Mappings
 vim.keymap.set('n', '<leader>e', cmd('lua MiniFiles.open(vim.api.nvim_buf_get_name(0))'), { desc = 'File Manager' })
 vim.keymap.set('n', '<leader>E', require('mini.files').open, { desc = 'File Manager' })
 
-vim.keymap.set("n", "<leader>ff", cmd('Telescope find_files'), { desc = "Telescope Files" })
-vim.keymap.set("n", "<leader>fb", cmd('GrapplePopup tags'), { desc = "Grapple Popup" })
+vim.keymap.set("n", "<leader>ff", cmd('Telescope find_files'), { desc = "Find Files" })
+vim.keymap.set("n", "<leader>fl", cmd('lua MiniVisits.select_label()'), { desc = "Labeled Files" })
+vim.keymap.set("n", "<leader>fp", cmd('lua MiniVisits.select_path()'), { desc = "Frecent Files" })
 vim.keymap.set(
   "n",
   "<leader>fF",
@@ -53,6 +56,11 @@ vim.keymap.set("n", '<leader>f/', cmd('Telescope live_grep'), { desc = 'Telescop
 vim.keymap.set("n", '<leader>wt', cmd('NoNeckPain'), { desc = 'Center Buffer'})
 vim.keymap.set("n", '<leader>w-', cmd('NoNeckPainWidthDown'), { desc = 'Narrow'})
 vim.keymap.set("n", '<leader>w+', cmd('NoNeckPainWidthUp'), { desc = 'Widen'})
+
+vim.keymap.set("n", '<leader>vl', cmd('lua MiniVisits.add_label()'), { desc = "Add Label"})
+vim.keymap.set("n", '<leader>vL', cmd('lua MiniVisits.remove_label()'), { desc = "Remove Label"})
+vim.keymap.set("n", '<leader>vp', cmd('lua MiniVisits.add_path()'), { desc = "Add Path"})
+vim.keymap.set("n", '<leader>vP', cmd('lua MiniVisits.remove_path()'), { desc = "Remove Path"})
 
 vim.keymap.set('n', '<leader>,x', cmd('xa'), { desc = 'Save All and Quit' })
 vim.keymap.set('n', '<leader>,c', cmd('Telescope colorschemes'), { desc = 'Colorschemes' })
