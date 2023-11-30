@@ -1,6 +1,7 @@
 local M = {
   "cbochs/grapple.nvim",
   event = "VeryLazy",
+  enabled = "false",
   keys = function()
     local grapple = require("grapple")
     return {

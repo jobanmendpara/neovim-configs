@@ -1,3 +1,5 @@
+local cmd = require("utils").cmd
+
 local  M = {
   "nvim-telescope/telescope.nvim",
   event = "VimEnter",
@@ -5,7 +7,6 @@ local  M = {
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
-    { "nvim-telescope/telescope-project.nvim" },
     { "nvim-telescope/telescope-symbols.nvim" },
   },
   config = function()
@@ -88,22 +89,18 @@ local  M = {
           override_file_sorter = true,
           case_mode = "smart_case",
         },
-        project = {
-          base_dirs = {
-            '~/Developer/uTyme/web',
-            '~/Developer/uTyme/service',
-            '~/Developer/uTyme/types',
-            '~/.dotfiles/nvim/.config/nvim',
-          },
-        },
         ["ui-select"] = {
         },
       },
     })
     telescope.load_extension("ui-select")
-    telescope.load_extension("project")
     telescope.load_extension("fzf")
   end,
+  keys = {
+    { "<leader>ts", cmd("Telescope"), desc = "Telescope - Menu" },
+    { "<leader>tr", cmd("Telescope resume"), desc = "Telescope - Resume" },
+    { "<leader>tn", cmd("Telescope notify"), desc = "Telescope - Notifications"}
+  }
 }
 
 return M

@@ -2,7 +2,7 @@ local cmd = require("utils").cmd
 local M = {
   "kawre/leetcode.nvim",
   build = ":TSUpdate html",
-  event = "VeryLazy",
+  event = "VimEnter",
   keys = {
     { "<leader>L", cmd("LcConsole"), desc = "LeetCode Console" }
   },

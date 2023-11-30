@@ -7,8 +7,9 @@ local M = {
       autocmds = {
         enableOnVimEnter = true,
         enableOnTabEnter = true,
+        reloadOnColorSchemeChange = true,
       },
-      width = 135
+      width = 140,
     })
   end,
 }

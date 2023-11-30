@@ -47,7 +47,6 @@ local M = {
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-u>"] = cmp.mapping.scroll_docs(4),
         ["<A-.>"] = cmp.mapping.complete(),
-        ["<Esc>"] = cmp.mapping.close(),
         ["<CR>"] = cmp.mapping.confirm({
           select = false,
         }),

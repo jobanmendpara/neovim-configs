@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +10 ~/.dotfiles/nvim/.config/nvim/lua/plugins/mini.lua
+badd +138 ~/.dotfiles/nvim/.config/nvim/lua/plugins/mini.lua
 badd +1 Session.vim
 badd +57 lua/plugins/lsp/lsp-utils.lua
 badd +22 lua/plugins/which-key.lua
@@ -30,13 +30,13 @@ badd +1 no-neck-pain-left.no-neck-pain
 badd +35 lua/plugins/lsp/init.lua
 badd +67 ~/Developer/cardinalManagement/admin/src/views/Employees/Employees.vue
 badd +1 ~/.dotfiles/nvim/.config/nvim/lua/plugins/buffalo.lua
-badd +9 lua/plugins/grapple.lua
+badd +4 lua/plugins/grapple.lua
 badd +1 lua/config/lazy.lua
 badd +16 lua/plugins/bookmarks.lua
 badd +4 lua/plugins/cutlass.lua
 badd +5 lua/plugins/navigator.lua
 badd +50 lua/plugins/cmp.lua
-badd +13 lua/plugins/noice.lua
+badd +19 lua/plugins/noice.lua
 badd +2 lua/plugins/auto-save.lua
 badd +9 init.lua
 badd +8 lua/colorschemes/catppuccin.lua
@@ -45,28 +45,15 @@ badd +4 lua/plugins/shade.lua
 badd +3 lua/plugins/twilight.lua
 badd +1 lua/config/autocmds.lua
 badd +11 after/ftplugin/gdscript.lua
+badd +1 lua/plugins/smart-splits.lua
+badd +4 lua/plugins/fidget.lua
+badd +9 lua/plugins/none-ls.lua
+badd +4 lua/plugins/lsp-timeout.lua
 argglobal
 %argdel
-edit lua/plugins/flash.lua
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-wincmd =
+edit lua/plugins/grapple.lua
 argglobal
-balt lua/config/keymaps.lua
+balt ~/.dotfiles/nvim/.config/nvim/lua/plugins/mini.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -75,35 +62,14 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 23 - ((21 * winheight(0) + 20) / 40)
+1
+normal! zo
+let s:l = 4 - ((3 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 23
-normal! 013|
-wincmd w
-argglobal
-if bufexists(fnamemodify("lua/plugins/flash.lua", ":p")) | buffer lua/plugins/flash.lua | else | edit lua/plugins/flash.lua | endif
-if &buftype ==# 'terminal'
-  silent file lua/plugins/flash.lua
-endif
-balt lua/config/keymaps.lua
-setlocal fdm=expr
-setlocal fde=nvim_treesitter#foldexpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=99
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 23 - ((21 * winheight(0) + 20) / 40)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 23
-normal! 013|
-wincmd w
-wincmd =
+keepjumps 4
+normal! 020|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -111,8 +77,6 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=1
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

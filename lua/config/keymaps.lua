@@ -14,29 +14,23 @@ vim.keymap.set("n", "<C-b>", "<C-b>zz", { desc = "Scroll Up" })
 vim.keymap.set("v", "<", "<gv", { desc = "Persist while indenting" })
 vim.keymap.set("v", ">", ">gv", { desc = "Persist while indenting" })
 
--- vim.keymap.set("n", "d", '"_d', { desc = "Delete without replacing clipboad" })
--- vim.keymap.set("n", "x", '"_x', { desc = "Cut without replacing clipboad" })
--- vim.keymap.set("n", "c", '"_c', { desc = "Change without replacing clipboad" })
--- vim.keymap.set("v", "p", '"_dP', { desc = "Paste without replacing clipboard" })
+vim.keymap.set("n", "d", '"_d', { desc = "Delete without replacing clipboad" })
+vim.keymap.set("n", "x", '"_x', { desc = "Cut without replacing clipboad" })
+vim.keymap.set("n", "c", '"_c', { desc = "Change without replacing clipboad" })
+vim.keymap.set("v", "p", '"_dP', { desc = "Paste without replacing clipboard" })
 
 vim.keymap.set("n", "U", "<C-r>", { desc = "Redo" })
 vim.keymap.set("n", "<C-r>", "<Nop>")
 
-vim.keymap.set("n", "<C-M-Up>", ":resize -8<CR>", { desc = "Vertical resize", silent = true })
-vim.keymap.set("n", "<C-M-Down>", ":resize +8<CR>", { desc = "Vertical resize", silent = true })
-vim.keymap.set("n", "<C-M-Left>", ":vertical resize -8<CR>", { desc = "Horizontal resize", silent = true })
-vim.keymap.set("n", "<C-M-Right>", ":vertical resize +8<CR>", { desc = "Horizontal resize", silent = true })
+vim.keymap.set("n", "<C-s>", "<CMD>up<CR>", { desc = "Save File" })
+vim.keymap.set("n", "<C-S-s>", "<CMD>wa<CR>", { desc = "Save File" })
 
-vim.keymap.set("n", "<C-s>", "<CMD>up<CR>", { desc = "Save File" });
-vim.keymap.set("n", "<C-S-s>", "<CMD>wa<CR>", { desc = "Save File" });
-
-vim.keymap.set("n", "<A-t>", "<CMD>tabnew<CR>", { desc = "New Tab" });
-vim.keymap.set("n", "<A-S-t>", "<CMD>tabclose<CR>", { desc = "Close Tab" });
-vim.keymap.set("n", "[<TAB>", "<CMD>tabnext<CR>", { desc = "Next Tab" });
-vim.keymap.set("n", "]<TAB>", "<CMD>tabprevious<CR>", { desc = "Previous Tab" });
+vim.keymap.set("n", "<A-t>", "<CMD>tabnew<CR>", { desc = "New Tab" })
+vim.keymap.set("n", "<A-S-t>", "<CMD>tabclose<CR>", { desc = "Close Tab" })
+vim.keymap.set("n", "[<TAB>", "<CMD>tabnext<CR>", { desc = "Next Tab" })
+vim.keymap.set("n", "]<TAB>", "<CMD>tabprevious<CR>", { desc = "Previous Tab" })
 
 -- Leader Mappings
-vim.keymap.set('n', '<leader>c', cmd('close'), { desc = 'Close Window' })
 vim.keymap.set('n', '<leader>e', cmd('lua MiniFiles.open(vim.api.nvim_buf_get_name(0))'), { desc = 'File Manager' })
 vim.keymap.set('n', '<leader>E', require('mini.files').open, { desc = 'File Manager' })
 
