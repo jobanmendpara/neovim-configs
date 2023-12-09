@@ -3,6 +3,8 @@ local M = {
   branch = "main",
   event = "BufEnter",
   config = function()
+    local cmd = require("utils").cmd
+
     local mini_ai = require("mini.ai").setup()
     local mini_bracketed = require("mini.bracketed").setup()
     local mini_comment = require("mini.comment").setup({
@@ -78,6 +80,7 @@ local M = {
         scroll_up = '<C-u>',
       },
     })
+    local mini_extra = require("mini.extra").setup()
     local mini_files = require("mini.files").setup({
       mappings = {
         close = "<ESC>"
@@ -102,7 +105,7 @@ local M = {
         indent_at_cursor = true,
         try_as_border = false,
       },
-      symbol = '╎',
+      symbol = '│',
     })
     local mini_move = require("mini.move").setup({
       mappings = {
@@ -117,7 +120,7 @@ local M = {
       },
     })
     local mini_pairs = require("mini.pairs").setup()
-    -- local mini_pick = require("mini.pick").setup()
+    local mini_pick = require("mini.pick").setup()
     local mini_operators = require("mini.operators").setup()
     local mini_sessions = require("mini.sessions").setup({
       autoread = false,
@@ -135,12 +138,28 @@ local M = {
       query_updaters = [[abcdefghilmoqrstuvwxyz0123456789_-,.ABCDEFGHIJKLMOQRSTUVWXYZ]],
       items = {
         mini_starter.sections.sessions(5, true),
-        { action = "Lazy sync", name = "u: Update Plugins", section = "Plugins" },
-        { action = "enew", name = "e: New Buffer", section = "Builtin actions" },
-        { action = "qa!", name = "q: Quit Neovim", section = "Builtin actions" },
-        { action = "e ~/.dotfiles/nvim/.config/nvim/init.lua", name = "c: Configure Neovim", section = "Builtin actions" },
-        { action = "e ~/.dotfiles/wezterm/.wezterm.lua", name = "w: Configure Wezterm", section = "Builtin actions" },
-        { action = "e ~/.dotfiles/", name = ".: Dotfiles", section = "Builtin actions" },
+        { action = "Lazy sync",                                            name = "u: Update Plugins",    section = "Plugins" },
+        { action = "enew",                                                 name = "e: New Buffer",        section = "Builtin actions" },
+        { action = "qa!",                                                  name = "q: Quit Neovim",       section = "Builtin actions" },
+        {
+          action = function()
+            vim.cmd("e ~/.dotfiles/nvim/.config/nvim/init.lua")
+            vim.cmd("cd %:p:h")
+          end,
+          name = "c: Configure Neovim",  section = "Builtin actions" },
+        { action = function()
+          vim.cmd("e ~/.dotfiles/wezterm/.wezterm.lua")
+          vim.cmd("cd %:p:h")
+        end,
+          name = "w: Configure Wezterm", section = "Builtin actions" },
+        {
+          action = function()
+            vim.cmd("e ~/.dotfiles/")
+            vim.cmd("cd %:p:h")
+          end,
+          name = ".: Dotfiles",
+          section = "Builtin actions"
+        },
       }
     })
     local mini_surround = require("mini.surround").setup()
@@ -148,10 +167,10 @@ local M = {
     local mini_visits = require("mini.visits").setup()
   end,
   keys = {
-    { "mf", "<CMD>lua MiniVisits.add_label()<CR>", desc = "Add Label" },
-    { "mF", "<CMD>lua MiniVisits.remove_label()<CR>", desc = "Remove Label" },
-    { "[p", "<CMD>lua MiniVisits.iterate_paths('forward')<CR>", desc = "Cycle Paths Backward"},
-    { "]p", "<CMD>lua MiniVisits.iterate_paths('backward')<CR>", desc = "Cycle Paths Forward"},
+    { "mf", "<CMD>lua MiniVisits.add_label()<CR>",               desc = "Add Label" },
+    { "mF", "<CMD>lua MiniVisits.remove_label()<CR>",            desc = "Remove Label" },
+    { "[p", "<CMD>lua MiniVisits.iterate_paths('forward')<CR>",  desc = "Cycle Paths Backward" },
+    { "]p", "<CMD>lua MiniVisits.iterate_paths('backward')<CR>", desc = "Cycle Paths Forward" },
   },
 }
 

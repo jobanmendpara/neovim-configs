@@ -5,7 +5,7 @@ local M = {
   dependencies = {
     "nvim-treesitter/nvim-treesitter-refactor",
     "windwp/nvim-ts-autotag",
-    "HiPhish/nvim-ts-rainbow2",
+    "HiPhish/rainbow-delimiters.nvim",
   },
   opts = {
     highlight = {
@@ -34,6 +34,7 @@ local M = {
       "luadoc",
       "typescript",
       "vue",
+      "go",
     },
     sync_install = true,
     ignore_install = {}, -- List of parsers to ignore installation

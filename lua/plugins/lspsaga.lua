@@ -2,7 +2,19 @@ local M = {
   'nvimdev/lspsaga.nvim',
   event = "VeryLazy",
   config = function()
-    require('lspsaga').setup({})
+    local codicons = require('codicons')
+    require('lspsaga').setup({
+      lightbulb = {
+        enable = true,
+        virtual_text = false,
+      },
+      ui = {
+        code_action = codicons.get('lightbulb'),
+      },
+      beacon = {
+        enable = false
+      }
+    })
   end,
   dependencies = {
     'nvim-treesitter/nvim-treesitter', -- optional

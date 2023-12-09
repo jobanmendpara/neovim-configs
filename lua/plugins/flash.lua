@@ -253,7 +253,7 @@ local M = {
     },
   keys = {
     {
-      '<leader>j',
+      '<M-j>',
       mode = { "n", "x", "o" },
       function()
         -- default options: exact mode, multi window, all directions, with a backdrop
@@ -269,7 +269,7 @@ local M = {
       desc = "Flash - 2 Char",
     },
     {
-      "<leader>J",
+      "<M-S-j>",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump({
