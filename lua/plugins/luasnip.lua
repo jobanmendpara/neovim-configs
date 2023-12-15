@@ -80,6 +80,22 @@ local M = {
       ),
     })
 
+    ls.add_snippets("vue", {
+      s(
+        {
+          trig = "v3tsc",
+        },
+        {
+          t({"<script setup lang=\"ts\">", ""}),
+          t({"</script>", "", ""}),
+          t({"<template>", ""}),
+          t({"</template>", "", ""}),
+          t({"<style scoped>", ""}),
+          t({"</style>"}),
+        }
+      ),
+    })
+
     require("luasnip.loaders.from_vscode").load()
   end,
 }

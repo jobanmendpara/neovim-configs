@@ -53,8 +53,6 @@ local M = {
         { mode = 'n', keys = ']p',         postkeys = ']' },
         { mode = 'n', keys = '[d',         postkeys = '[' },
         { mode = 'n', keys = ']d',         postkeys = ']' },
-        { mode = 'n', keys = '[m',         postkeys = '[' },
-        { mode = 'n', keys = ']m',         postkeys = ']' },
         { mode = 'n', keys = '[<TAB>',     postkeys = '[' },
         { mode = 'n', keys = ']<TAB>',     postkeys = ']' },
         { mode = 'n', keys = '<C-w><C-h>', postkeys = '<C-w>' },
@@ -89,6 +87,7 @@ local M = {
         preview = true,
       },
     })
+
     local mini_indentscope = require("mini.indentscope").setup({
       draw = {
         delay = 100,
@@ -138,40 +137,80 @@ local M = {
       query_updaters = [[abcdefghilmoqrstuvwxyz0123456789_-,.ABCDEFGHIJKLMOQRSTUVWXYZ]],
       items = {
         mini_starter.sections.sessions(5, true),
-        { action = "Lazy sync",                                            name = "u: Update Plugins",    section = "Plugins" },
-        { action = "enew",                                                 name = "e: New Buffer",        section = "Builtin actions" },
-        { action = "qa!",                                                  name = "q: Quit Neovim",       section = "Builtin actions" },
+        { action = "Telescope find_files", name = "f: Find Files",  section = "Actions" },
+        { action = "enew",                 name = "e: New Buffer",  section = "Actions" },
+        { action = "qa!",                  name = "q: Quit Neovim", section = "Actions" },
         {
           action = function()
             vim.cmd("e ~/.dotfiles/nvim/.config/nvim/init.lua")
             vim.cmd("cd %:p:h")
           end,
-          name = "c: Configure Neovim",  section = "Builtin actions" },
-        { action = function()
-          vim.cmd("e ~/.dotfiles/wezterm/.wezterm.lua")
-          vim.cmd("cd %:p:h")
-        end,
-          name = "w: Configure Wezterm", section = "Builtin actions" },
+          name = "c: Neovim",
+          section = "Configs"
+        },
+        {
+          action = function()
+            vim.cmd("e ~/.dotfiles/wezterm/.wezterm.lua")
+            vim.cmd("cd %:p:h")
+          end,
+          name = "w: Wezterm",
+          section = "Configs"
+        },
         {
           action = function()
             vim.cmd("e ~/.dotfiles/")
             vim.cmd("cd %:p:h")
           end,
           name = ".: Dotfiles",
-          section = "Builtin actions"
+          section = "Configs"
         },
       }
     })
     local mini_surround = require("mini.surround").setup()
     local mini_trailspace = require("mini.trailspace").setup()
-    local mini_visits = require("mini.visits").setup()
+    local mini_visits = require("mini.visits").setup({
+      track = {
+        event = '',
+      }
+    })
   end,
-  keys = {
-    { "mf", "<CMD>lua MiniVisits.add_label()<CR>",               desc = "Add Label" },
-    { "mF", "<CMD>lua MiniVisits.remove_label()<CR>",            desc = "Remove Label" },
-    { "[p", "<CMD>lua MiniVisits.iterate_paths('forward')<CR>",  desc = "Cycle Paths Backward" },
-    { "]p", "<CMD>lua MiniVisits.iterate_paths('backward')<CR>", desc = "Cycle Paths Forward" },
-  },
+  keys = function()
+    local mini_visits = require("mini.visits")
+
+    function toggleFileMark()
+      local winId = vim.api.nvim_get_current_win()
+      local bufId = vim.api.nvim_win_get_buf(winId)
+      local currentBufferPath = vim.api.nvim_buf_get_name(bufId)
+
+      local list = mini_visits.list_paths()
+      local existsInList = false
+
+      for _, path in ipairs(list) do
+        if currentBufferPath == path then
+          existsInList = true
+          break
+        end
+      end
+
+      if existsInList then
+        vim.notify("Unmark File")
+        mini_visits.remove_path()
+      else
+        vim.notify("Mark File")
+        return mini_visits.register_visit()
+      end
+    end
+
+    return {
+      { "<leader>vf", function() toggleFileMark() end,                      desc = "Mark File" },
+      { "<leader>vl", "<CMD>lua MiniVisits.add_label()<CR>",                desc = "Add Label" },
+      { "<leader>vL", "<CMD>lua MiniVisits.remove_label()<CR>",             desc = "Remove Label" },
+      { "[v",         function() mini_visits.iterate_paths('forward') end,  desc = "Cycle Paths Backward" },
+      { "]v",         function() mini_visits.iterate_paths('backward') end, desc = "Cycle Paths Forward" },
+      { "<M-v>",         "<CMD>lua MiniVisits.select_path()<CR>",              desc = "View Marked Files" },
+      { "<M-l>",         "<CMD>lua MiniVisits.select_label()<CR>",             desc = "View Labels" },
+    }
+  end,
 }
 
 return M

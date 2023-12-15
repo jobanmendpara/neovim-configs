@@ -1,33 +1,34 @@
 local cmd = require("utils").cmd
 
-local  M = {
+local M = {
   "nvim-telescope/telescope.nvim",
   event = "VimEnter",
-  tag = "0.1.2",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-telescope/telescope-symbols.nvim" },
+    { "LukasPietzschmann/telescope-tabs" },
+    { "DanielVolchek/tailiscope.nvim" },
   },
   config = function()
-    local icons = require("codicons")
     local actions = require("telescope.actions")
+    local finders = require("telescope.finders")
+    local icons = require("codicons")
+    local pickers = require("telescope.pickers")
     local previewers = require("telescope.previewers")
     local sorters = require("telescope.sorters")
     local telescope = require("telescope")
+    local telescope_tabs = require("telescope-tabs")
+
+    telescope_tabs.setup()
 
     telescope.setup({
       pickers = {
-        fd = {
-          layout_strategy = "horizontal",
-        },
         find_files = {
           hidden = true,
           no_ignore = false,
           fuzzy = true,
-          -- layout_strategy = "horizontal",
-          find_command = { "fd", "-t","f"},
-          -- find_command = { "rg", "--files"}
+          find_command = { "fd", "-t", "f" },
         },
         live_grep = {},
       },
@@ -70,7 +71,8 @@ local  M = {
         path_display = { "truncate" },
         winblend = 0,
         border = {},
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
         file_previewer = previewers.vim_buffer_cat.new,
@@ -83,23 +85,45 @@ local  M = {
         },
       },
       extensions = {
-        fzf = {
-          fuzzy = true,
-          override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = "smart_case",
-        },
         ["ui-select"] = {
-        },
+          layout_config = {
+            width = 0.3,
+            height = 0.5,
+          },
+        }
       },
     })
     telescope.load_extension("ui-select")
     telescope.load_extension("fzf")
+    telescope.load_extension("telescope-tabs")
+    telescope.load_extension("tailiscope")
   end,
   keys = {
-    { "<leader>ts", cmd("Telescope"), desc = "Telescope - Menu" },
-    { "<leader>tr", cmd("Telescope resume"), desc = "Telescope - Resume" },
-    { "<leader>tn", cmd("Telescope notify"), desc = "Telescope - Notifications"}
+    {
+      "<leader>t",
+      ":Telescope ",
+      desc = "Telescope - Menu"
+    },
+    {
+      "<leader>,o",
+      cmd("Telescope vim_options"),
+      desc = "Telescope - Options"
+    },
+    {
+      "<M-F>",
+      cmd("Telescope find_files"),
+      desc = "Telescope - Find Files"
+    },
+    {
+      "<M-/>",
+      cmd("Telescope live_grep"),
+      desc = "Telescope - Live Grep"
+    },
+    {
+      "<M-f>",
+      cmd("Telescope current_buffer_fuzzy_find"),
+      desc = "Telescope - Find in Buffer"
+    },
   }
 }
 
