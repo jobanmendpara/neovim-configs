@@ -35,13 +35,12 @@ vim.opt.laststatus = 3
 vim.opt.listchars = {
     tab = '  ',
     eol = ' ', --'↲',
-    trail = '·',
-    extends = '>',
-    precedes = '<',
+    trail = '-',
+    extends = ' ',
+    precedes = ' ',
     space = ' '
 }
 vim.opt.list = true
-
 
 vim.opt.mousemoveevent = true
 vim.opt.mousescroll = "ver:3,hor:6"
