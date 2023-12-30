@@ -12,16 +12,17 @@ local M = {
   },
   config = function()
     local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
     local finders = require("telescope.finders")
     local icons = require("codicons")
     local pickers = require("telescope.pickers")
     local previewers = require("telescope.previewers")
     local sorters = require("telescope.sorters")
+    local config = require("telescope.config").values
     local telescope = require("telescope")
     local telescope_tabs = require("telescope-tabs")
 
     telescope_tabs.setup()
-
     telescope.setup({
       pickers = {
         find_files = {
@@ -65,7 +66,7 @@ local M = {
           preview_cutoff = 0,
         },
         file_sorter = sorters.get_fuzzy_file,
-        file_ignore_patterns = { "node_modules", ".git", "dist" },
+        file_ignore_patterns = { "node_modules", ".git", "dist", "presets" },
         hidden = true,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
         path_display = { "truncate" },
@@ -91,12 +92,56 @@ local M = {
             height = 0.5,
           },
         }
-      },
+      }
     })
     telescope.load_extension("ui-select")
     telescope.load_extension("fzf")
     telescope.load_extension("telescope-tabs")
     telescope.load_extension("tailiscope")
+
+    local visits_picker = function()
+      local project_root = require("utils").find_git_root()
+      if not project_root then
+        print("Project root not found.")
+        return
+      end
+
+      local visits_finder = function()
+        return finders.new_table({
+          results = require("mini.visits").list_paths(),
+          entry_maker = function(entry)
+            local relative_path = vim.fn.fnamemodify(entry, ':.'):gsub(vim.pesc(project_root) .. '/', '')
+            return {
+              value = entry,
+              display = relative_path,
+              ordinal = relative_path,
+            }
+          end,
+        })
+      end
+
+      -- My Pickers
+      pickers.new({}, {
+        prompt_title = "Visits",
+        finder = visits_finder(),
+        previewer = previewers.vim_buffer_cat.new({}),
+        sorter = config.generic_sorter({}),
+        attach_mappings = function(prompt_bufnr, map)
+          map('i', '<M-d>', function()
+            local selection = action_state.get_selected_entry()
+            local current_picker = action_state.get_current_picker(prompt_bufnr)
+            require("mini.visits").remove_path(selection.value)
+
+            current_picker:refresh(visits_finder(), { reset_prompt = true })
+          end)
+          map('i', '<M-v>', function()
+            actions.close(prompt_bufnr)
+          end)
+          return true
+        end,
+      }):find()
+    end
+    vim.api.nvim_create_user_command('Visits', visits_picker, {})
   end,
   keys = {
     {
@@ -110,7 +155,7 @@ local M = {
       desc = "Telescope - Options"
     },
     {
-      "<M-F>",
+      "<leader>ff",
       cmd("Telescope find_files"),
       desc = "Telescope - Find Files"
     },
@@ -123,6 +168,11 @@ local M = {
       "<M-f>",
       cmd("Telescope current_buffer_fuzzy_find"),
       desc = "Telescope - Find in Buffer"
+    },
+    {
+      "<leader>fv",
+      cmd("Visits"),
+      desc = "View Marked Files"
     },
   }
 }

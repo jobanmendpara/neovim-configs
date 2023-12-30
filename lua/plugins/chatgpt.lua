@@ -1,5 +1,6 @@
 local M = {
   "jackMort/ChatGPT.nvim",
+  enabled = false,
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",

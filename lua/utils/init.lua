@@ -144,4 +144,12 @@ M.cmd = function (command)
   return "<CMD>" .. command .. "<CR>"
 end
 
+M.find_git_root = function ()
+    local git_root = vim.fn.systemlist("git -C " .. vim.fn.expand('%:p:h') .. " rev-parse --show-toplevel")[1]
+    if vim.v.shell_error ~= 0 then
+        return nil
+    end
+    return git_root
+end
+
 return M

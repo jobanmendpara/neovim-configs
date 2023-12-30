@@ -11,12 +11,7 @@ local M = {
       },
       mappings = {
         enabled = true,
-        toggle = "<leader>wt",
-        toggleLeftSide = "<leader>wl",
-        toggleRightSide = "<leader>wr",
-        widthUp = "<leader>w+",
-        widthDown = "<leader>w-",
-        scratchPad = "<leader>ws",
+        toggle = "<C-w>z",
       },
       width = 140,
     })
