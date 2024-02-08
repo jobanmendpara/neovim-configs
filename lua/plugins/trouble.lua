@@ -8,7 +8,44 @@ local M = {
     })
   end,
   keys = {
-    { "<leader>pt", cmd('TodoTelescope'), { desc = "Project Tasks & Notes"}}
+    {
+      "<leader>td",
+      cmd("TroubleToggle document_diagnostics"),
+      desc = "View Document Diagnostics",
+    },
+    {
+      "<leader>tw",
+      cmd("TroubleToggle workspace_diagnostics"),
+      desc = "View Workspace Diagnostics",
+    },
+    {
+      "gd",
+      function ()
+        require("trouble").toggle("lsp_definitions")
+      end,
+      desc = "View Definitions"
+    },
+    {
+      "gi",
+      function ()
+        require("trouble").toggle("lsp_implementations")
+      end,
+      desc = "View Implementations",
+    },
+    {
+      "gR",
+      function ()
+        require("trouble").toggle("lsp_references")
+      end,
+      desc = "View References"
+    },
+    {
+      "gT",
+      function ()
+        require("trouble").toggle("lsp_type_definitions")
+      end,
+      desc = "View References"
+    },
   }
 }
 

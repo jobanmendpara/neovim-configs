@@ -8,10 +8,7 @@ local M = {
     local diagnostics = null_ls.builtins.diagnostics
 
     null_ls.setup({
-      sources = {
-        -- formatters.prettier,
-        -- diagnostics.eslint,
-      }
+      sources = {}
     })
   end,
 }

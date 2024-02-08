@@ -1,3 +1,5 @@
+local cmd = require('utils').cmd
+
 local M = {
   "michaelrommel/nvim-silicon",
   event = "VeryLazy",
@@ -5,7 +7,7 @@ local M = {
   config = function ()
     require('silicon').setup({
       font = "Geist Mono",
-      theme = "gruvbox-dark",
+      theme = "monokai",
       background = "#076678",
       background_image = nil,
       pad_horiz = 100,

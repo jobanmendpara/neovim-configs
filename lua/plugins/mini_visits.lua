@@ -41,8 +41,8 @@ local M = {
       { ">",              function() toggleFileMark() end,                 desc = "Mark File" },
       { "<leader>>",      cmd("lua MiniVisits.add_label()"),               desc = "Add Label" },
       { "<leader><",      cmd("lua MiniVisits.remove_label()"),            desc = "Remove Label" },
-      { "[v",             cmd("lua MiniVisits.iterate_paths('backward')"), desc = "Cycle Paths Backward" },
-      { "]v",             cmd("lua MiniVisits.iterate_paths('forward')"),  desc = "Cycle Paths Forward" },
+      { "[v",             cmd("lua MiniVisits.iterate_paths('backward', nil, { wrap = true })"), desc = "Cycle Paths Backward" },
+      { "]v",             cmd("lua MiniVisits.iterate_paths('forward', nil, { wrap = true })"),  desc = "Cycle Paths Forward" },
       { "<leader><M-BS>", cmd("lua MiniVisits.select_label()"),            desc = "View Labels" },
     }
   end,

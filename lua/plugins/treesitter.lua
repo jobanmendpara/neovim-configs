@@ -20,7 +20,7 @@ local M = {
       additional_vim_regex_highlighting = false,
     },
     rainbow = {
-      enable = true,
+      enable = false,
       query = "rainbow-parens",
     },
     autopairs = { enable = true },

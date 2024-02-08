@@ -7,7 +7,6 @@ local M = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-telescope/telescope-symbols.nvim" },
-    { "LukasPietzschmann/telescope-tabs" },
     { "DanielVolchek/tailiscope.nvim" },
   },
   config = function()
@@ -20,9 +19,7 @@ local M = {
     local sorters = require("telescope.sorters")
     local config = require("telescope.config").values
     local telescope = require("telescope")
-    local telescope_tabs = require("telescope-tabs")
 
-    telescope_tabs.setup()
     telescope.setup({
       pickers = {
         find_files = {
@@ -85,19 +82,13 @@ local M = {
           n = { ["q"] = actions.close },
         },
       },
-      extensions = {
-        ["ui-select"] = {
-          layout_config = {
-            width = 0.3,
-            height = 0.5,
-          },
-        }
-      }
+      extensions = {}
     })
     telescope.load_extension("ui-select")
     telescope.load_extension("fzf")
-    telescope.load_extension("telescope-tabs")
     telescope.load_extension("tailiscope")
+
+    -- My Pickers
 
     local visits_picker = function()
       local project_root = require("utils").find_git_root()
@@ -119,8 +110,6 @@ local M = {
           end,
         })
       end
-
-      -- My Pickers
       pickers.new({}, {
         prompt_title = "Visits",
         finder = visits_finder(),
@@ -145,9 +134,9 @@ local M = {
   end,
   keys = {
     {
-      "<leader>t",
+      "<leader>tc",
       ":Telescope ",
-      desc = "Telescope - Menu"
+      desc = "Telescope"
     },
     {
       "<leader>,o",
@@ -160,19 +149,39 @@ local M = {
       desc = "Telescope - Find Files"
     },
     {
-      "<M-/>",
+      "<leader>fg",
       cmd("Telescope live_grep"),
       desc = "Telescope - Live Grep"
     },
     {
-      "<M-f>",
+      "<leader>fs",
       cmd("Telescope current_buffer_fuzzy_find"),
       desc = "Telescope - Find in Buffer"
+    },
+    {
+      "<leader>ft",
+      cmd("Telescope lsp_document_symbols"),
+      desc = "Telescope - Document Symbols"
+    },
+    {
+      "<leader>fT",
+      cmd("Telescope lsp_workspace_symbols"),
+      desc = "Telescope - Workspace Symbols"
+    },
+    {
+      "<leader>fG",
+      cmd("Telescope lsp_dynamic_workspace_symbols"),
+      desc = "Telescope - Dynamic Workspace Symbols"
     },
     {
       "<leader>fv",
       cmd("Visits"),
       desc = "View Marked Files"
+    },
+    {
+      "<leader>tr",
+      cmd("Telescope resume"),
+      desc = "Telescope - Resume"
     },
   }
 }

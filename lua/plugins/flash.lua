@@ -254,7 +254,7 @@ local M = {
   keys = function()
     return {
       {
-        '<leader>jw',
+        '<M-s>',
         mode = { "n", "x", "o" },
         function()
           local Flash = require("flash")
@@ -301,6 +301,7 @@ local M = {
             end,
           })
         end,
+        desc = "Flash - Word"
       },
       {
         's',
@@ -308,13 +309,22 @@ local M = {
         function()
           -- default options: exact mode, multi window, all directions, with a backdrop
           local Flash = require("flash")
-          local function format(opts)
-            return {
-              { opts.match.label1, "FlashMatch" },
-              { opts.match.label2, "FlashLabel" },
-            }
-          end
           Flash.jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        'S',
+        mode = { "n", "x", "o" },
+        function()
+          -- default options: exact mode, multi window, all directions, with a backdrop
+          local Flash = require("flash")
+          Flash.jump({
+            search = {
+              mode = 'search',
+              max_length = 2,
+            }
+          })
         end,
         desc = "Flash",
       },

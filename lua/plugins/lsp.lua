@@ -3,16 +3,41 @@ local M = {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     lazy = true,
-    config = false,
-    init = function()
-      vim.g.lsp_zero_extend_cmp = 0
-      vim.g.lsp_zero_extend_lspconfig = 0
-    end,
+    config = true,
   },
   {
     'williamboman/mason.nvim',
-    lazy = false,
-    config = true,
+    lazy = true,
+    config = function ()
+      require('mason').setup({
+        ui = {
+          icons = {
+            enabled = true,
+            style = 'solid',
+          },
+          mappings = {
+            enabled = true,
+            priority = 100,
+          },
+          sidebar = {
+            enabled = true,
+            width = 40,
+            position = 'left',
+          },
+          floating = {
+            enabled = true,
+            border = 'single',
+            max_height = math.floor(vim.o.lines * 0.5),
+            max_width = math.floor(vim.o.columns * 0.4),
+          },
+          window = {
+            border = 'single',
+            max_height = math.floor(vim.o.lines * 0.5),
+            max_width = math.floor(vim.o.columns * 0.4),
+          },
+        },
+      })
+    end,
   },
   {
     'neovim/nvim-lspconfig',
@@ -25,29 +50,19 @@ local M = {
       local lsp_zero = require('lsp-zero')
       lsp_zero.extend_lspconfig()
 
-      lsp_zero.on_attach(function(client, bufnr)
-      end)
-
-      -- lsp_zero.format_on_save({
-      --   format_opts = {
-      --     async = false,
-      --     timeout_ms = 10000,
-      --   },
-      --   servers = {
-      --     ['tsserver'] = { 'javascript', 'typescript' },
-      --   }
-      -- })
-
       require('mason-lspconfig').setup({
-        ensure_installed = {},
+        ensure_installed = {
+          'eslint',
+          'lua_ls',
+          'tsserver',
+          'tailwindcss',
+        },
         handlers = {
           lsp_zero.default_setup,
-
           lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
           end,
-
           tsserver = function()
             require('lspconfig').tsserver.setup({
               handlers = {
@@ -87,7 +102,7 @@ local M = {
                 end,
               },
             })
-          end
+          end,
         }
       })
 
@@ -169,9 +184,8 @@ local M = {
         end
       end
 
-      local methods = vim.lsp.protocol.Methods
-      vim.lsp.handlers[methods.textDocument_hover] = enhanced_float_handler(vim.lsp.handlers.hover)
-      vim.lsp.handlers[methods.textDocument_signatureHelp] = enhanced_float_handler(vim.lsp.handlers.signature_help)
+      vim.lsp.handlers["textDocument/hover"] = enhanced_float_handler(vim.lsp.handlers.hover)
+      vim.lsp.handlers["textDocument/signatureHelp"] = enhanced_float_handler(vim.lsp.handlers.signature_help)
     end
   }
 }

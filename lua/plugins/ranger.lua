@@ -1,6 +1,7 @@
 local M = {
   "kelly-lin/ranger.nvim",
   event = "VeryLazy",
+  enabled = false,
   config = function()
     local ranger = require("ranger-nvim")
     ranger.setup({
@@ -22,8 +23,7 @@ local M = {
     })
   end,
   keys = {
-    { "<leader>e", function() require("ranger-nvim").open(true) end, { desc = "File Explorer" } },
-    { "<leader>E", function() require("ranger-nvim").open() end, { desc = "File Explorer" } }
+    { "<leader>e", function() require("ranger-nvim").open(true) end, desc = "File Explorer" },
   }
 }
 

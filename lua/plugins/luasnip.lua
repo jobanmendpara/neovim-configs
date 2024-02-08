@@ -43,14 +43,30 @@ local M = {
           trig = "lzplg",
         },
         {
-          t({"local M = {", ""}),
-          t({"\t\""}), i(1), t({"\",", ""}),
-          t({"\tevent = "}), i(2), t({"\"\",", ""}),
-          t({"\tconfig = function ()", ""}),
+          t({ "local M = {", "" }),
+          t({ "\t\"" }), i(1), t({ "\",", "" }),
+          t({ "\tevent = " }), i(2), t({ "\"\",", "" }),
+          t({ "\tconfig = function ()", "" }),
           i(3),
-          t({"\tend,", ""}),
-          t({"}", "", ""}),
-          t({"return M"}),
+          t({ "\tend,", "" }),
+          t({ "}", "", "" }),
+          t({ "return M" }),
+        }
+      ),
+    })
+
+    ls.add_snippets("typescript", {
+      s(
+        {
+          trig = "trpc",
+        },
+        {
+          t({ "import { z } from 'zod'", "" }),
+          t({ "import { TRPCError } from '@trpc/server';", "" }),
+          t({ "import { createTRPCRouter } from '~/server/trpc/trpc';", "", "" }),
+          t({ "export const " }), i(1), t({ " = createTRPCRouter({", "" }),
+          t({ "\t" }), i(2), t({ ": " }), i(3), t({ ",", "" }),
+          t({ "});"}),
         }
       ),
     })
@@ -61,21 +77,21 @@ local M = {
           trig = "v2tsc",
         },
         {
-          t({"<template>", ""}),
-          t({"</template>", "", ""}),
-          t({"<script lang=\"ts\">", ""}),
-          t({"import { defineComponent } from '@vue/composition-api';", "", ""}),
-          t({"export default defineComponent({", ""}),
-          t({"\tname: '"}), i(1), t({"',", ""}),
-          t({"\tcomponents: {},", ""}),
-          t({"\tprops: {},", ""}),
-          t({"\tsetup(props) {", ""}),
-          t({"\t\treturn {};", ""}),
-          t({"\t},", ""}),
-          t({"});", ""}),
-          t({"</script>", "", ""}),
-          t({"<style lang=\"sass\" scoped>", ""}),
-          t({"</style>"}),
+          t({ "<template>", "" }),
+          t({ "</template>", "", "" }),
+          t({ "<script lang=\"ts\">", "" }),
+          t({ "import { defineComponent } from '@vue/composition-api';", "", "" }),
+          t({ "export default defineComponent({", "" }),
+          t({ "\tname: '" }), i(1), t({ "',", "" }),
+          t({ "\tcomponents: {},", "" }),
+          t({ "\tprops: {},", "" }),
+          t({ "\tsetup(props) {", "" }),
+          t({ "\t\treturn {};", "" }),
+          t({ "\t},", "" }),
+          t({ "});", "" }),
+          t({ "</script>", "", "" }),
+          t({ "<style lang=\"sass\" scoped>", "" }),
+          t({ "</style>" }),
         }
       ),
     })
@@ -86,12 +102,12 @@ local M = {
           trig = "v3tsc",
         },
         {
-          t({"<script setup lang=\"ts\">", ""}),
-          t({"</script>", "", ""}),
-          t({"<template>", ""}),
-          t({"</template>", "", ""}),
-          t({"<style scoped>", ""}),
-          t({"</style>"}),
+          t({ "<script setup lang=\"ts\">", "" }),
+          t({ "</script>", "", "" }),
+          t({ "<template>", "" }),
+          t({ "</template>", "", "" }),
+          t({ "<style scoped>", "" }),
+          t({ "</style>" }),
         }
       ),
     })
