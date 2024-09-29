@@ -6,15 +6,15 @@ local M = {
   config = function()
     require("no-neck-pain").setup({
       autocmds = {
-        enableOnVimEnter = false,
-        enableOnTabEnter = false,
+        enableOnVimEnter = true,
+        enableOnTabEnter = true,
         reloadOnColorSchemeChange = true,
       },
-      width = 140,
+      width = 120,
     })
   end,
   keys = {
-    { "<leader>wt", cmd('NoNeckPain'), desc = "Center Window"}
+    { "<M-c>", cmd('NoNeckPain'), desc = "Center Window"}
   }
 }
 

@@ -313,23 +313,23 @@ local M = {
         end,
         desc = "Flash",
       },
+      -- {
+      --   'S',
+      --   mode = { "n", "x", "o" },
+      --   function()
+      --     -- default options: exact mode, multi window, all directions, with a backdrop
+      --     local Flash = require("flash")
+      --     Flash.jump({
+      --       search = {
+      --         mode = 'search',
+      --         max_length = 2,
+      --       }
+      --     })
+      --   end,
+      --   desc = "Flash",
+      -- },
       {
-        'S',
-        mode = { "n", "x", "o" },
-        function()
-          -- default options: exact mode, multi window, all directions, with a backdrop
-          local Flash = require("flash")
-          Flash.jump({
-            search = {
-              mode = 'search',
-              max_length = 2,
-            }
-          })
-        end,
-        desc = "Flash",
-      },
-      {
-        "<leader>jl",
+        "S",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump({

@@ -38,12 +38,12 @@ vim.keymap.set("n", "g.", cmd("cd %:p:h"), { desc = "Move to this directory" })
 vim.keymap.set("n", "<F3>", function()
   local clients = vim.lsp.buf_get_clients()
 
-  vim.lsp.buf.format({ async = false })
-
   for _, client in pairs(clients) do
-    if client.name == "eslint" then
+    if client.name == "eslint" or client.name == "volar" then
       vim.cmd("EslintFixAll")
       return
+    else
+      vim.lsp.buf.format({ async = false })
     end
   end
 
@@ -77,11 +77,11 @@ vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, { desc = "Code Action" })
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show Line Diagnostics" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go To Declaration" })
 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-vim.keymap.set("n", "<leader>Li", cmd("LspInfo"), { desc = "LSP Info" })
-vim.keymap.set("n", "<leader>Lm", cmd("Mason"), { desc = "Mason" })
-vim.keymap.set("n", "<leader>Lr", cmd("LspRestart"), { desc = "LSP Restart" })
-vim.keymap.set("n", "<leader>Ls", cmd("LspStart"), { desc = "LSP Start" })
-vim.keymap.set("n", "<leader>Lq", cmd("LspStop"), { desc = "LSP Stop" })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+vim.keymap.set("n", "<leader>li", cmd("LspInfo"), { desc = "LSP Info" })
+vim.keymap.set("n", "<leader>lm", cmd("Mason"), { desc = "Mason" })
+vim.keymap.set("n", "<leader>lr", cmd("LspRestart"), { desc = "LSP Restart" })
+vim.keymap.set("n", "<leader>ls", cmd("LspStart"), { desc = "LSP Start" })
+vim.keymap.set("n", "<leader>lq", cmd("LspStop"), { desc = "LSP Stop" })
+-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })

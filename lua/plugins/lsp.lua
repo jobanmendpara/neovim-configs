@@ -8,7 +8,7 @@ local M = {
   {
     'williamboman/mason.nvim',
     lazy = true,
-    config = function ()
+    config = function()
       require('mason').setup({
         ui = {
           icons = {
@@ -48,29 +48,38 @@ local M = {
     },
     config = function()
       local lsp_zero = require('lsp-zero')
+      local nvim_lsp = require('lspconfig')
       lsp_zero.extend_lspconfig()
-
       require('mason-lspconfig').setup({
         ensure_installed = {
           'eslint',
           'lua_ls',
           'tsserver',
           'tailwindcss',
+          'volar',
         },
         handlers = {
           lsp_zero.default_setup,
           lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
-            require('lspconfig').lua_ls.setup(lua_opts)
+            nvim_lsp.lua_ls.setup(lua_opts)
+          end,
+          denols = function()
+            nvim_lsp.denols.setup({
+              root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc", "import_map.json"),
+              filetypes = { 'typescript', 'javascript' },
+            })
           end,
           tsserver = function()
-            require('lspconfig').tsserver.setup({
+            nvim_lsp.tsserver.setup({
+              root_dir = nvim_lsp.util.root_pattern("package.json", "tsconfig.json"),
+              single_file_support = false,
               handlers = {
                 ["textDocument/publishDiagnostics"] = function(
-                  _,
-                  result,
-                  ctx,
-                  config
+                    _,
+                    result,
+                    ctx,
+                    config
                 )
                   if result.diagnostics == nil then
                     return
@@ -101,6 +110,16 @@ local M = {
                   )
                 end,
               },
+              init_options = {
+                plugins = {
+                  {
+                    name = '@vue/typescript-plugin',
+                    location = require('mason-registry').get_package('vue-language-server'):get_install_path(),
+                    languages = { 'vue' },
+                  },
+                },
+              },
+              filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'vue' },
             })
           end,
         }
@@ -134,29 +153,30 @@ local M = {
           vim.wo[win].concealcursor = 'n'
 
           -- Extra highlights.
-          for l, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
-            for pattern, hl_group in pairs {
-              ['|%S-|'] = '@text.reference',
-              ['@%S+'] = '@parameter',
-              ['^%s*(Parameters:)'] = '@text.title',
-              ['^%s*(Return:)'] = '@text.title',
-              ['^%s*(See also:)'] = '@text.title',
-              ['{%S-}'] = '@parameter',
-            } do
-              local from = 1 ---@type integer?
-              while from do
-                local to
-                from, to = line:find(pattern, from)
-                if from then
-                  vim.api.nvim_buf_set_extmark(buf, md_namespace, l - 1, from - 1, {
-                    end_col = to,
-                    hl_group = hl_group,
-                  })
-                end
-                from = to and to + 1 or nil
-              end
-            end
-          end
+          -- INFO: Disabled due to invalid namepsace id (md_namespace)
+          -- for l, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+          --   for pattern, hl_group in pairs {
+          --     ['|%S-|'] = '@text.reference',
+          --     ['@%S+'] = '@parameter',
+          --     ['^%s*(Parameters:)'] = '@text.title',
+          --     ['^%s*(Return:)'] = '@text.title',
+          --     ['^%s*(See also:)'] = '@text.title',
+          --     ['{%S-}'] = '@parameter',
+          --   } do
+          --     local from = 1 ---@type integer?
+          --     while from do
+          --       local to
+          --       from, to = line:find(pattern, from)
+          --       if from then
+          --         vim.api.nvim_buf_set_extmark(buf, md_namespace, l - 1, from - 1, {
+          --           end_col = to,
+          --           hl_group = hl_group,
+          --         })
+          --       end
+          --       from = to and to + 1 or nil
+          --     end
+          --   end
+          -- end
 
           -- Add keymaps for opening links.
           if not vim.b[buf].markdown_keys then
@@ -186,7 +206,7 @@ local M = {
 
       vim.lsp.handlers["textDocument/hover"] = enhanced_float_handler(vim.lsp.handlers.hover)
       vim.lsp.handlers["textDocument/signatureHelp"] = enhanced_float_handler(vim.lsp.handlers.signature_help)
-    end
+    end,
   }
 }
 

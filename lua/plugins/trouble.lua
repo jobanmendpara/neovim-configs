@@ -1,53 +1,30 @@
-local cmd = require("utils").cmd
 local M = {
   "folke/trouble.nvim",
-  event = "BufEnter",
-  config = function ()
-    require("trouble").setup({
-      mode = "workspace_diagnostics"
-    })
-  end,
+  branch = "dev", -- IMPORTANT!
+  enabled = true,
   keys = {
     {
-      "<leader>td",
-      cmd("TroubleToggle document_diagnostics"),
-      desc = "View Document Diagnostics",
+      "<leader><F8>",
+      "<cmd>Trouble diagnostics toggle<cr>",
+      desc = "Diagnostics (Trouble)",
     },
     {
-      "<leader>tw",
-      cmd("TroubleToggle workspace_diagnostics"),
-      desc = "View Workspace Diagnostics",
+      "<leader><F20>",
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      desc = "Buffer Diagnostics (Trouble)",
     },
     {
-      "gd",
-      function ()
-        require("trouble").toggle("lsp_definitions")
-      end,
-      desc = "View Definitions"
+      "<leader><F32>",
+      "<cmd>Trouble symbols toggle focus=false<cr>",
+      desc = "Symbols (Trouble)",
     },
     {
-      "gi",
-      function ()
-        require("trouble").toggle("lsp_implementations")
-      end,
-      desc = "View Implementations",
+      "<leader><F56>",
+      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+      desc = "LSP Definitions / references / ... (Trouble)",
     },
-    {
-      "gR",
-      function ()
-        require("trouble").toggle("lsp_references")
-      end,
-      desc = "View References"
-    },
-    {
-      "gT",
-      function ()
-        require("trouble").toggle("lsp_type_definitions")
-      end,
-      desc = "View References"
-    },
-  }
+  },
+  opts = {}, -- for default options, refer to the configuration section for custom setup.
 }
 
 return M
-

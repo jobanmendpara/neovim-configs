@@ -1,6 +1,7 @@
 local M = {
   "echasnovski/mini.indentscope",
   event = "VeryLazy",
+	enabled = true,
   config = function ()
     require("mini.indentscope").setup({
       draw = {

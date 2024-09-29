@@ -27,14 +27,7 @@ local M = {
     autotag = { enable = true },
     indent = { enable = true },
     ensure_installed = {
-      "bash",
-      "javascript",
-      "json",
-      "lua",
-      "luadoc",
-      "typescript",
-      "vue",
-      "go",
+      'lua',
     },
     sync_install = true,
     ignore_install = {}, -- List of parsers to ignore installation

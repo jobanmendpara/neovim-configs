@@ -11,7 +11,6 @@ local M = {
   },
   opts = function()
     local cmp = require("cmp")
-    local lsp_kinds = require("utils").lsp_kinds
 
     local has_words_before = function()
       if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -30,19 +29,20 @@ local M = {
         end,
       },
       formatting = {
-        format = function(entry, vim_item)
-          if vim.tbl_contains({ "path" }, entry.source.name) then
-            local icon, hl_group = require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
-            if icon then
-              vim_item.kind = icon
-              vim_item.kind_hl_group = hl_group
-              return vim_item
-            end
-          end
-          vim_item.kind = (lsp_kinds[vim_item.kind] or "") .. " " .. vim_item.kind
+        format = require('lspkind').cmp_format({
+          mode = 'symbol', -- show only symbol annotations
+          maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          -- can also be a function to dynamically calculate max width such as
+          -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+          ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 
-          return vim_item
-        end,
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          before = function(_entry, vim_item)
+            return vim_item
+          end
+        })
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -65,8 +65,8 @@ local M = {
         ["<C-p>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.jumpable( -1) then
-            luasnip.jump( -1)
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
@@ -82,9 +82,11 @@ local M = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
-      experimental = { ghost_text = {
-        hl_group = "LspCodeLens",
-      } },
+      experimental = {
+        ghost_text = {
+          hl_group = "LspCodeLens",
+        }
+      },
     }
   end,
   config = function(_, opts)
@@ -101,8 +103,8 @@ local M = {
       sources = cmp.config.sources({
         { name = "path" },
       }, {
-          { name = "cmdline" },
-        }),
+        { name = "cmdline" },
+      }),
     })
   end,
 }
